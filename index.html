@@ -14,15 +14,17 @@
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
 
+  <!-- TOP HEADER (User info ONLY lives here) -->
   <header class="app-top" id="topBar" hidden>
     <div class="top-left">
       <div class="app-mark" aria-hidden="true">V2</div>
       <div class="top-title">
         <div class="title">IELTS Speaking App</div>
-        <div class="subtitle">Sets • Study • Practice • Samples</div>
+        <div class="subtitle">Sets • Study • Practise • Sample</div>
       </div>
     </div>
 
+    <!-- JS injects: name • group • band badge + Edit info button -->
     <div class="top-right" id="topRight"></div>
   </header>
 
@@ -62,18 +64,16 @@
             </div>
 
             <div class="actions">
-              <button class="btn btn-primary" type="submit" id="startBtn">
-                Start
-              </button>
+              <button class="btn btn-primary" type="submit" id="startBtn">Start</button>
               <div class="hint" id="loginHint" aria-live="polite"></div>
             </div>
 
             <div class="rules">
               <div class="rules-title">How to use</div>
               <ul>
-                <li>Choose a set → pick a question → open Study / Practise / Sample.</li>
-                <li>In Practise, complete short tasks and write sentences with key vocabulary.</li>
-                <li>Use Sample answers to notice phrases, collocations, and structure.</li>
+                <li>Select a set → pick a question → open Study / Practise / Sample.</li>
+                <li>In Practise, complete short tasks and write sentences using key words.</li>
+                <li>Use Sample answers to notice structure, phrases, and collocations.</li>
               </ul>
             </div>
           </form>
@@ -83,44 +83,26 @@
       </div>
     </section>
 
-    <!-- MENU -->
+    <!-- MAIN MENU -->
     <section class="screen" id="screenMenu" aria-labelledby="menuHeading">
       <div class="shell">
         <div class="menu-head">
           <div>
             <h2 id="menuHeading">Main Menu</h2>
-            <p class="muted">Select a speaking set to begin.</p>
-          </div>
-
-          <div class="menu-actions">
-            <button class="btn btn-secondary" id="editInfoBtn" type="button">
-              Edit info
-            </button>
+            <p class="muted">Choose a speaking set to begin.</p>
           </div>
         </div>
 
-        <div class="profile-card">
-          <div class="profile-left">
-            <div class="avatar" aria-hidden="true" id="avatarLetters">ST</div>
-            <div class="profile-meta">
-              <div class="profile-name" id="profileName">—</div>
-              <div class="profile-sub" id="profileGroup">—</div>
-            </div>
-          </div>
-          <div class="band-badge" id="profileBand">Band —</div>
-        </div>
-
+        <!-- IMPORTANT: setsGrid is NOT inside topRight/user chip -->
         <div class="sets-grid" id="setsGrid" aria-label="Speaking sets"></div>
       </div>
     </section>
 
-    <!-- SET -->
+    <!-- SET PAGE -->
     <section class="screen" id="screenSet" aria-labelledby="setHeading">
       <div class="shell">
         <div class="set-top">
-          <button class="btn btn-secondary" id="backToMenuBtn" type="button">
-            ← Back
-          </button>
+          <button class="btn btn-secondary" id="backToMenuBtn" type="button">← Back</button>
           <div class="set-title-wrap">
             <h2 id="setHeading">Speaking Set</h2>
             <p class="muted" id="setSummary">—</p>
@@ -128,15 +110,9 @@
         </div>
 
         <div class="parts-tabs" role="tablist" aria-label="Parts">
-          <button class="part-tab active" data-part="part1" role="tab" aria-selected="true">
-            Part 1
-          </button>
-          <button class="part-tab" data-part="part2" role="tab" aria-selected="false">
-            Part 2
-          </button>
-          <button class="part-tab" data-part="part3" role="tab" aria-selected="false">
-            Part 3
-          </button>
+          <button class="part-tab active" data-part="part1" role="tab" aria-selected="true">Part 1</button>
+          <button class="part-tab" data-part="part2" role="tab" aria-selected="false">Part 2</button>
+          <button class="part-tab" data-part="part3" role="tab" aria-selected="false">Part 3</button>
         </div>
 
         <div class="set-layout">
@@ -145,7 +121,6 @@
               <div class="q-list-title">Questions</div>
               <div class="q-list-sub muted" id="qListSub">—</div>
             </div>
-
             <div class="q-items" id="questionList"></div>
           </aside>
 
@@ -165,12 +140,14 @@
                   </span>
                   Study
                 </button>
+
                 <button class="q-tab" data-qtab="practice" role="tab" aria-selected="false">
                   <span class="q-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L19.5 10H14V4.5zM7 13h10v2H7v-2zm0 4h10v2H7v-2zM7 9h4v2H7V9z"/></svg>
                   </span>
                   Practise
                 </button>
+
                 <button class="q-tab" data-qtab="sample" role="tab" aria-selected="false">
                   <span class="q-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><path d="M12 3c4.97 0 9 3.58 9 8s-4.03 8-9 8c-1.28 0-2.5-.24-3.6-.67L4 21l1.5-4.7C4.57 15.13 3 13.18 3 11c0-4.42 4.03-8 9-8zm-5 7h10v2H7v-2zm0-3h7v2H7V7zm0 6h6v2H7v-2z"/></svg>
