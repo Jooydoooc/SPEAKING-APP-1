@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IELTS Speaking App — Version 2</title>
 
-  <!-- Google Font (Typography requirement) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,22 +19,24 @@
       <div class="app-mark" aria-hidden="true">V2</div>
       <div class="top-title">
         <div class="title">IELTS Speaking App</div>
-        <div class="subtitle">Version 2 • Fast • Mobile-first</div>
+        <div class="subtitle">Sets • Study • Practice • Samples</div>
       </div>
     </div>
+
     <div class="top-right" id="topRight"></div>
   </header>
 
   <main class="app">
-    <!-- LOGIN SCREEN -->
+    <!-- LOGIN -->
     <section class="screen screen-active" id="screenLogin" aria-labelledby="loginHeading">
       <div class="shell">
         <div class="hero">
-          <div class="hero-badge" aria-hidden="true">Band 8+</div>
-          <h1 id="loginHeading">Welcome back</h1>
-          <p class="muted">
-            Enter your details to start. No email, no password — just practice.
-          </p>
+          <div class="hero-badge" aria-hidden="true">
+            <span class="dot"></span>
+            Speaking Trainer
+          </div>
+          <h1 id="loginHeading">Welcome</h1>
+          <p class="muted">Enter your details to start. No email, no password.</p>
         </div>
 
         <div class="card card-lg">
@@ -43,44 +44,19 @@
             <div class="form-grid">
               <div class="field">
                 <label for="fullName">Full Name</label>
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  inputmode="text"
-                  autocomplete="name"
-                  placeholder="e.g., Doniyor Eshmurodov"
-                  required
-                />
+                <input id="fullName" type="text" autocomplete="name" placeholder="e.g., Ali Karimov" required />
                 <div class="help" id="errName" role="status" aria-live="polite"></div>
               </div>
 
               <div class="field">
                 <label for="groupName">Group Name</label>
-                <input
-                  id="groupName"
-                  name="groupName"
-                  type="text"
-                  inputmode="text"
-                  placeholder="e.g., Even 4:30"
-                  required
-                />
+                <input id="groupName" type="text" placeholder="e.g., Even 4:30" required />
                 <div class="help" id="errGroup" role="status" aria-live="polite"></div>
               </div>
 
               <div class="field">
                 <label for="bandScore">Current Band Score</label>
-                <input
-                  id="bandScore"
-                  name="bandScore"
-                  type="number"
-                  min="0"
-                  max="9"
-                  step="0.5"
-                  inputmode="decimal"
-                  placeholder="e.g., 6.5"
-                  required
-                />
+                <input id="bandScore" type="number" min="0" max="9" step="0.5" inputmode="decimal" placeholder="e.g., 6.5" required />
                 <div class="help" id="errBand" role="status" aria-live="polite"></div>
               </div>
             </div>
@@ -93,29 +69,27 @@
             </div>
 
             <div class="rules">
-              <div class="rules-title">Quick rules</div>
+              <div class="rules-title">How to use</div>
               <ul>
-                <li>Speak clearly. Use simple + accurate grammar first.</li>
-                <li>Add 2–3 strong collocations per answer.</li>
-                <li>Record yourself weekly and compare improvements.</li>
+                <li>Choose a set → pick a question → open Study / Practise / Sample.</li>
+                <li>In Practise, complete short tasks and write sentences with key vocabulary.</li>
+                <li>Use Sample answers to notice phrases, collocations, and structure.</li>
               </ul>
             </div>
           </form>
         </div>
 
-        <div class="footer-note">
-          Tip: Your info is saved on this device (localStorage).
-        </div>
+        <div class="footer-note">Your info is saved on this device (localStorage).</div>
       </div>
     </section>
 
-    <!-- MAIN MENU SCREEN -->
+    <!-- MENU -->
     <section class="screen" id="screenMenu" aria-labelledby="menuHeading">
       <div class="shell">
         <div class="menu-head">
           <div>
             <h2 id="menuHeading">Main Menu</h2>
-            <p class="muted">Choose a set and practice Part 1 / 2 / 3.</p>
+            <p class="muted">Select a speaking set to begin.</p>
           </div>
 
           <div class="menu-actions">
@@ -140,7 +114,7 @@
       </div>
     </section>
 
-    <!-- SET SCREEN (placeholder route/screen) -->
+    <!-- SET -->
     <section class="screen" id="screenSet" aria-labelledby="setHeading">
       <div class="shell">
         <div class="set-top">
@@ -149,37 +123,71 @@
           </button>
           <div class="set-title-wrap">
             <h2 id="setHeading">Speaking Set</h2>
-            <p class="muted" id="setSummary">Part 1 / Part 2 / Part 3</p>
+            <p class="muted" id="setSummary">—</p>
           </div>
         </div>
 
-        <div class="card">
-          <div class="placeholder">
-            <div class="placeholder-title">Set page placeholder</div>
-            <p class="muted">
-              This is where Set content will appear (questions, timers, recording, study area).
-              For now, you can confirm the navigation + UI works perfectly on mobile.
-            </p>
+        <div class="parts-tabs" role="tablist" aria-label="Parts">
+          <button class="part-tab active" data-part="part1" role="tab" aria-selected="true">
+            Part 1
+          </button>
+          <button class="part-tab" data-part="part2" role="tab" aria-selected="false">
+            Part 2
+          </button>
+          <button class="part-tab" data-part="part3" role="tab" aria-selected="false">
+            Part 3
+          </button>
+        </div>
 
-            <div class="placeholder-grid">
-              <div class="mini-card">
-                <div class="mini-title">Part 1</div>
-                <div class="mini-sub muted">Short answers • 30–40s</div>
+        <div class="set-layout">
+          <aside class="q-list">
+            <div class="q-list-head">
+              <div class="q-list-title">Questions</div>
+              <div class="q-list-sub muted" id="qListSub">—</div>
+            </div>
+
+            <div class="q-items" id="questionList"></div>
+          </aside>
+
+          <section class="q-view">
+            <div class="card q-card" id="questionCard">
+              <div class="q-card-top">
+                <div class="q-label" id="qLabel">—</div>
+                <div class="q-topic muted" id="qTopic">—</div>
               </div>
-              <div class="mini-card">
-                <div class="mini-title">Part 2</div>
-                <div class="mini-sub muted">1 min prep • 2 min talk</div>
+
+              <div class="q-text" id="qText">Select a question.</div>
+
+              <div class="q-tabs" role="tablist" aria-label="Learning tabs">
+                <button class="q-tab active" data-qtab="study" role="tab" aria-selected="true">
+                  <span class="q-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.12 5.12 3 6.5 3H20v16h-1.5c-1.38 0-2.5 1.12-2.5 2.5V22H6.5C5.12 22 4 20.88 4 19.5v-14zM18.5 20H7c-.55 0-1 .45-1 1s.45 1 1 1h9.5c0-.72.25-1.39.67-1.9.39-.48.91-.83 1.49-1.01-.11-.05-.16-.06-.16-.09z"/></svg>
+                  </span>
+                  Study
+                </button>
+                <button class="q-tab" data-qtab="practice" role="tab" aria-selected="false">
+                  <span class="q-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L19.5 10H14V4.5zM7 13h10v2H7v-2zm0 4h10v2H7v-2zM7 9h4v2H7V9z"/></svg>
+                  </span>
+                  Practise
+                </button>
+                <button class="q-tab" data-qtab="sample" role="tab" aria-selected="false">
+                  <span class="q-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M12 3c4.97 0 9 3.58 9 8s-4.03 8-9 8c-1.28 0-2.5-.24-3.6-.67L4 21l1.5-4.7C4.57 15.13 3 13.18 3 11c0-4.42 4.03-8 9-8zm-5 7h10v2H7v-2zm0-3h7v2H7V7zm0 6h6v2H7v-2z"/></svg>
+                  </span>
+                  Sample
+                </button>
               </div>
-              <div class="mini-card">
-                <div class="mini-title">Part 3</div>
-                <div class="mini-sub muted">Discussion • deeper ideas</div>
+
+              <div class="q-panels">
+                <div class="q-panel active" id="panelStudy"></div>
+                <div class="q-panel" id="panelPractice"></div>
+                <div class="q-panel" id="panelSample"></div>
               </div>
             </div>
 
-            <div class="notice">
-              Next upgrade: add questions + “Submit” + Band 9 sample answers after submit.
-            </div>
-          </div>
+            <div class="tiny muted" id="tipLine"></div>
+          </section>
         </div>
       </div>
     </section>
