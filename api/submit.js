@@ -9,20 +9,24 @@ module.exports = async function handler(req, res) {
       return res.status(405).json({ ok: false, error: "Method not allowed. Use POST." });
     }
 
-    // Parse body safely
-    let body = req.body;
-    if (!body) body = {};
+    let body = req.body || {};
     if (typeof body === "string") {
       try { body = JSON.parse(body); } catch { body = {}; }
     }
 
     const submission = {
+      setId: String(body.setId || "").trim(),
+      setTitle: String(body.setTitle || "").trim(),
+      questionKey: String(body.questionKey || "").trim(),
+
       studentName: String(body.studentName || "").trim(),
       group: String(body.group || "").trim(),
+      level: String(body.level || "").trim(),
+
       part: String(body.part || "").trim(),
-      topic: String(body.topic || "").trim(),
       question: String(body.question || "").trim(),
       notes: String(body.notes || "").trim(),
+
       createdAt: new Date().toISOString()
     };
 
@@ -38,15 +42,16 @@ module.exports = async function handler(req, res) {
 
     const message =
       `🎙️ IELTS Speaking Submission\n` +
+      (submission.setTitle ? `🧩 Set: ${submission.setTitle}\n` : "") +
       `👤 Student: ${submission.studentName}\n` +
       (submission.group ? `👥 Group: ${submission.group}\n` : "") +
-      `🧩 Part: ${submission.part}\n` +
-      (submission.topic ? `🏷️ Topic: ${submission.topic}\n` : "") +
+      (submission.level ? `📈 Level: ${submission.level}\n` : "") +
+      `🧠 Part: ${submission.part}\n` +
+      (submission.questionKey ? `🔑 Key: ${submission.questionKey}\n` : "") +
       `❓ Question:\n${submission.question}\n\n` +
       (submission.notes ? `📝 Notes:\n${submission.notes}\n\n` : "") +
       `🕒 Time: ${submission.createdAt}`;
 
-    // Send to Telegram only if env vars exist
     if (token && chatId) {
       const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: "POST",
