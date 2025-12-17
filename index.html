@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IELTS Speaking Band 8 Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🎙️</div>
+      <div>
+        <h1>Band 8 Speaking Trainer</h1>
+        <p class="sub">Pronunciation • Vocabulary • Grammar • Fluency</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn ghost" id="resetBtn" title="Reset local notes">Reset Notes</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="left">
+      <div class="tabs">
+        <button class="tab active" data-tab="part1">Part 1</button>
+        <button class="tab" data-tab="part2">Part 2</button>
+        <button class="tab" data-tab="part3">Part 3</button>
+        <button class="tab" data-tab="pron">Pronunciation</button>
+        <button class="tab" data-tab="fluency">Fluency</button>
+      </div>
+
+      <!-- PART 1 -->
+      <div class="panel active" id="tab-part1">
+        <div class="panel-head">
+          <h2>Part 1 Trainer</h2>
+          <p>Goal: 25–35 seconds. Direct answer → reason → example → finish.</p>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="field">
+              <label>Topic</label>
+              <select id="p1Topic"></select>
+            </div>
+            <div class="field">
+              <label>Question</label>
+              <select id="p1Question"></select>
+            </div>
+          </div>
+
+          <div class="question-box">
+            <div class="qtitle">Question</div>
+            <div class="qtext" id="p1QText">—</div>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="p1NextBtn">Next Question</button>
+            <button class="btn ghost" id="p1StartBtn">Start 35s</button>
+            <button class="btn danger" id="p1StopBtn" disabled>Stop</button>
+          </div>
+
+          <div class="timer" id="p1Timer">00:35</div>
+
+          <div class="helpers">
+            <div class="helper">
+              <h3>Band-8 phrase starters</h3>
+              <div class="chips" id="p1Chips"></div>
+            </div>
+            <div class="helper">
+              <h3>Grammar Switches (pick 1–2)</h3>
+              <div class="switches" id="p1Switches"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 2 -->
+      <div class="panel" id="tab-part2">
+        <div class="panel-head">
+          <h2>Part 2 Trainer</h2>
+          <p>Goal: 2 minutes. 1 min prep + 2 min talk. Use story + details + reflection.</p>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="field">
+              <label>Topic</label>
+              <select id="p2Topic"></select>
+            </div>
+            <div class="field">
+              <label>Task Card</label>
+              <select id="p2Question"></select>
+            </div>
+          </div>
+
+          <div class="question-box">
+            <div class="qtitle">Task</div>
+            <div class="qtext" id="p2QText">—</div>
+          </div>
+
+          <div class="prep-grid">
+            <div class="prep">
+              <div class="prep-head">
+                <h3>1-minute plan</h3>
+                <div class="mini">Use keywords only</div>
+              </div>
+              <textarea id="p2Notes" placeholder="Who? When? Where? What happened? Feelings? Lesson?"></textarea>
+              <div class="row">
+                <button class="btn ghost" id="p2SaveNotes">Save Notes</button>
+                <button class="btn ghost" id="p2LoadNotes">Load Notes</button>
+              </div>
+            </div>
+
+            <div class="prep">
+              <div class="prep-head">
+                <h3>Timers</h3>
+                <div class="mini">Prep then Speak</div>
+              </div>
+              <div class="row">
+                <button class="btn" id="p2StartPrepBtn">Start 1:00 Prep</button>
+                <button class="btn" id="p2StartSpeakBtn">Start 2:00 Speak</button>
+                <button class="btn danger" id="p2StopBtn" disabled>Stop</button>
+              </div>
+              <div class="timer big" id="p2Timer">01:00</div>
+
+              <div class="helpers">
+                <div class="helper">
+                  <h3>Band-8 structure map</h3>
+                  <ul class="bullets">
+                    <li><b>Opening (10s):</b> what it is + why it matters</li>
+                    <li><b>Story (50s):</b> when/where/who + main event</li>
+                    <li><b>Details (50s):</b> feelings + problem + solution</li>
+                    <li><b>Reflection (10s):</b> lesson + recommendation</li>
+                  </ul>
+                </div>
+                <div class="helper">
+                  <h3>Vocabulary Bundles</h3>
+                  <div class="bundles" id="p2Bundles"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Record your answer (optional)</h3>
+          <p class="muted">Works in modern browsers. Allow microphone access.</p>
+          <div class="row">
+            <button class="btn" id="recStartBtn">Start Recording</button>
+            <button class="btn danger" id="recStopBtn" disabled>Stop</button>
+            <button class="btn ghost" id="recClearBtn" disabled>Clear</button>
+          </div>
+          <div class="audio-area" id="audioArea">
+            <div class="muted">No recording yet.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 3 -->
+      <div class="panel" id="tab-part3">
+        <div class="panel-head">
+          <h2>Part 3 Trainer</h2>
+          <p>Goal: 45–60 seconds. Opinion → why → example → alternative view → conclusion.</p>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="field">
+              <label>Topic</label>
+              <select id="p3Topic"></select>
+            </div>
+            <div class="field">
+              <label>Question</label>
+              <select id="p3Question"></select>
+            </div>
+          </div>
+
+          <div class="question-box">
+            <div class="qtitle">Question</div>
+            <div class="qtext" id="p3QText">—</div>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="p3NextBtn">Next Question</button>
+            <button class="btn ghost" id="p3StartBtn">Start 60s</button>
+            <button class="btn danger" id="p3StopBtn" disabled>Stop</button>
+          </div>
+
+          <div class="timer" id="p3Timer">01:00</div>
+
+          <div class="helpers">
+            <div class="helper">
+              <h3>Band-8 linking</h3>
+              <div class="chips" id="p3Chips"></div>
+            </div>
+            <div class="helper">
+              <h3>Grammar Switches</h3>
+              <div class="switches" id="p3Switches"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRONUNCIATION -->
+      <div class="panel" id="tab-pron">
+        <div class="panel-head">
+          <h2>Pronunciation Lab</h2>
+          <p>Train: stress, linking, endings, intonation. Focus on ONE thing per week.</p>
+        </div>
+
+        <div class="card">
+          <div class="pron-grid">
+            <div class="pron-card">
+              <h3>Chunk Drills</h3>
+              <p class="muted">Repeat in chunks (not single words). Copy rhythm.</p>
+              <div class="chunk" id="chunkText">To be honest, I’m not really into it.</div>
+              <div class="row">
+                <button class="btn" id="chunkNext">Next Chunk</button>
+                <button class="btn ghost" id="chunkSlow">Slow (visual)</button>
+              </div>
+              <div class="muted small" id="chunkHint">Stress: HON-est • REAL-ly • IN-to</div>
+            </div>
+
+            <div class="pron-card">
+              <h3>Ending Sounds</h3>
+              <p class="muted">Final consonants = clarity.</p>
+              <div class="ending-list" id="endingsList"></div>
+            </div>
+
+            <div class="pron-card">
+              <h3>Intonation Meaning</h3>
+              <p class="muted">Say the same sentence with different attitude.</p>
+              <div class="chunk" id="intonationSentence">I guess it’s fine.</div>
+              <div class="chips" id="intonationModes"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUENCY -->
+      <div class="panel" id="tab-fluency">
+        <div class="panel-head">
+          <h2>Fluency Gym</h2>
+          <p>3-Speed Training: 30s slow → 30s normal → 30s fast.</p>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="field">
+              <label>Choose a Question</label>
+              <select id="fluencyQuestion"></select>
+            </div>
+            <div class="field">
+              <label>Mode</label>
+              <select id="fluencyMode">
+                <option value="slow">Speed 1 — Slow & clear (30s)</option>
+                <option value="normal">Speed 2 — Normal & detailed (30s)</option>
+                <option value="fast">Speed 3 — Fast & nonstop (30s)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="question-box">
+            <div class="qtitle">Prompt</div>
+            <div class="qtext" id="fluencyQText">—</div>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="fluencyStartBtn">Start 30s</button>
+            <button class="btn danger" id="fluencyStopBtn" disabled>Stop</button>
+            <button class="btn ghost" id="fluencyNextBtn">Next Prompt</button>
+          </div>
+
+          <div class="timer" id="fluencyTimer">00:30</div>
+
+          <div class="helpers">
+            <div class="helper">
+              <h3>Anti-pause tools</h3>
+              <ul class="bullets">
+                <li>Fillers: <b>Well</b>, <b>Actually</b>, <b>To be fair</b></li>
+                <li>Buy time: <b>That’s an interesting question…</b></li>
+                <li>Rephrase: <b>What I mean is…</b></li>
+              </ul>
+            </div>
+            <div class="helper">
+              <h3>Band-8 self-check</h3>
+              <div class="checklist" id="fluencyChecklist"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="right">
+      <div class="side-card">
+        <h2>Submit to Teacher</h2>
+        <p class="muted">Students fill name/group once, then submit the current question.</p>
+
+        <div class="field">
+          <label>Student name</label>
+          <input id="studentName" class="input" placeholder="e.g., Ali" />
+        </div>
+
+        <div class="field">
+          <label>Group (optional)</label>
+          <input id="studentGroup" class="input" placeholder="e.g., Even 4:30" />
+        </div>
+
+        <div class="row">
+          <button class="btn" id="submitBtn">Submit Current Task</button>
+          <button class="btn ghost" id="saveStudentBtn">Save</button>
+        </div>
+
+        <div class="status" id="submitStatus">Ready.</div>
+
+        <div class="side-card-inner">
+          <h3>What gets submitted?</h3>
+          <ul class="bullets">
+            <li>Part + Topic + Current Question</li>
+            <li>Part 2 Notes (if any)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <h2>Saved Notes</h2>
+        <p class="muted">Part 2 notes are saved in the browser.</p>
+        <div class="saved" id="savedPreview">No saved notes yet.</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <span>Made for classroom speaking practice</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
