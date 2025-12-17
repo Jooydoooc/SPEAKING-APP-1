@@ -4,31 +4,174 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IELTS Speaking Band 8 Trainer</title>
+
+  <!-- Modern icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
+
+  <!-- LOGIN OVERLAY -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-shell">
+      <div class="login-brand">
+        <div class="login-badge">
+          <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+        <div>
+          <h1 class="login-title">Band 8 Speaking Trainer</h1>
+          <p class="login-subtitle">Pronunciation • Vocabulary • Grammar • Fluency</p>
+        </div>
+      </div>
+
+      <div class="login-grid">
+        <div class="login-card">
+          <h2 class="card-title">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Login
+          </h2>
+          <p class="muted">Fill in your details to start the speaking practice.</p>
+
+          <div class="field">
+            <label><i class="fa-solid fa-user"></i> Name</label>
+            <input id="loginName" class="input" placeholder="e.g., Ali" autocomplete="name"/>
+          </div>
+
+          <div class="field">
+            <label><i class="fa-solid fa-users"></i> Group</label>
+            <input id="loginGroup" class="input" placeholder="e.g., Even 4:30" />
+          </div>
+
+          <div class="field">
+            <label><i class="fa-solid fa-chart-line"></i> Current speaking level</label>
+            <select id="loginLevel">
+              <option value="Band 4.0 - 5.0">Band 4.0 – 5.0</option>
+              <option value="Band 5.5 - 6.0">Band 5.5 – 6.0</option>
+              <option value="Band 6.5 - 7.0" selected>Band 6.5 – 7.0</option>
+              <option value="Band 7.5+">Band 7.5+</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="startBtn">
+              <i class="fa-solid fa-play"></i>
+              Start Practice
+            </button>
+            <button class="btn ghost" id="demoBtn" title="Fill sample info">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              Demo
+            </button>
+          </div>
+
+          <div class="status" id="loginStatus">Ready.</div>
+          <p class="tiny muted">
+            Tip: Your data is saved in this browser (localStorage). You won’t need to login again on the same device.
+          </p>
+        </div>
+
+        <div class="login-card instructions">
+          <h2 class="card-title">
+            <i class="fa-solid fa-graduation-cap"></i>
+            How to use this app (Important)
+          </h2>
+
+          <div class="instruction-block">
+            <h3><i class="fa-solid fa-bullseye"></i> The Band 8 Rule</h3>
+            <p class="muted">
+              Improve fast by focusing on <b>ONE thing per answer</b>.
+              Don’t try to fix everything at once.
+            </p>
+            <ul class="bullets">
+              <li><b>Pronunciation:</b> stress / endings / linking</li>
+              <li><b>Vocabulary:</b> collocations + paraphrase</li>
+              <li><b>Grammar:</b> accuracy + 1–2 “switches”</li>
+              <li><b>Fluency:</b> fewer long pauses</li>
+            </ul>
+          </div>
+
+          <div class="instruction-block">
+            <h3><i class="fa-solid fa-stopwatch"></i> Timers</h3>
+            <ul class="bullets">
+              <li><b>Part 1:</b> speak for <b>35 seconds</b></li>
+              <li><b>Part 2:</b> <b>1 minute plan</b> + <b>2 minutes speak</b></li>
+              <li><b>Part 3:</b> speak for <b>60 seconds</b></li>
+              <li><b>Fluency Gym:</b> <b>3-speed training</b> (30s each)</li>
+            </ul>
+          </div>
+
+          <div class="instruction-block">
+            <h3><i class="fa-solid fa-microphone"></i> Recording</h3>
+            <p class="muted">
+              You can record Part 2 answers. Allow microphone access.
+              Recording works best on <b>HTTPS</b> (Vercel is HTTPS ✅).
+            </p>
+          </div>
+
+          <div class="instruction-block">
+            <h3><i class="fa-solid fa-paper-plane"></i> Submit to Teacher</h3>
+            <p class="muted">
+              The app can send your current task + notes to the teacher using <b>/api/submit</b>.
+              If Telegram env vars are enabled on Vercel, it will forward to Telegram automatically.
+            </p>
+            <ul class="bullets">
+              <li>It submits: <b>Part + Topic + Current question</b> (+ Part 2 notes)</li>
+              <li>Your <b>Name/Group/Level</b> are included</li>
+            </ul>
+          </div>
+
+          <div class="instruction-block">
+            <h3><i class="fa-solid fa-shield-halved"></i> Privacy</h3>
+            <p class="muted">
+              Your notes and profile are saved only in your browser. The teacher receives only what you submit.
+            </p>
+          </div>
+
+          <div class="login-note">
+            <i class="fa-solid fa-circle-info"></i>
+            When you are ready, press <b>Start Practice</b>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <header class="topbar" id="topbar">
     <div class="brand">
-      <div class="logo">🎙️</div>
+      <div class="logo">
+        <i class="fa-solid fa-microphone-lines"></i>
+      </div>
       <div>
         <h1>Band 8 Speaking Trainer</h1>
-        <p class="sub">Pronunciation • Vocabulary • Grammar • Fluency</p>
+        <p class="sub" id="profileLine">—</p>
       </div>
     </div>
 
     <div class="header-actions">
-      <button class="btn ghost" id="resetBtn" title="Reset local notes">Reset Notes</button>
+      <button class="btn ghost" id="editProfileBtn" title="Edit profile">
+        <i class="fa-solid fa-pen-to-square"></i>
+        Profile
+      </button>
+      <button class="btn ghost" id="resetBtn" title="Reset local notes">
+        <i class="fa-solid fa-rotate"></i>
+        Reset Notes
+      </button>
+      <button class="btn danger" id="logoutBtn" title="Logout (clear profile)">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        Logout
+      </button>
     </div>
   </header>
 
-  <main class="layout">
+  <main class="layout" id="appContainer">
     <section class="left">
       <div class="tabs">
-        <button class="tab active" data-tab="part1">Part 1</button>
-        <button class="tab" data-tab="part2">Part 2</button>
-        <button class="tab" data-tab="part3">Part 3</button>
-        <button class="tab" data-tab="pron">Pronunciation</button>
-        <button class="tab" data-tab="fluency">Fluency</button>
+        <button class="tab active" data-tab="part1"><i class="fa-solid fa-comment-dots"></i> Part 1</button>
+        <button class="tab" data-tab="part2"><i class="fa-solid fa-clipboard-list"></i> Part 2</button>
+        <button class="tab" data-tab="part3"><i class="fa-solid fa-comments"></i> Part 3</button>
+        <button class="tab" data-tab="pron"><i class="fa-solid fa-wave-square"></i> Pronunciation</button>
+        <button class="tab" data-tab="fluency"><i class="fa-solid fa-bolt"></i> Fluency</button>
       </div>
 
       <!-- PART 1 -->
@@ -56,9 +199,9 @@
           </div>
 
           <div class="row">
-            <button class="btn" id="p1NextBtn">Next Question</button>
-            <button class="btn ghost" id="p1StartBtn">Start 35s</button>
-            <button class="btn danger" id="p1StopBtn" disabled>Stop</button>
+            <button class="btn" id="p1NextBtn"><i class="fa-solid fa-forward"></i> Next</button>
+            <button class="btn ghost" id="p1StartBtn"><i class="fa-solid fa-play"></i> Start 35s</button>
+            <button class="btn danger" id="p1StopBtn" disabled><i class="fa-solid fa-stop"></i> Stop</button>
           </div>
 
           <div class="timer" id="p1Timer">00:35</div>
@@ -108,8 +251,8 @@
               </div>
               <textarea id="p2Notes" placeholder="Who? When? Where? What happened? Feelings? Lesson?"></textarea>
               <div class="row">
-                <button class="btn ghost" id="p2SaveNotes">Save Notes</button>
-                <button class="btn ghost" id="p2LoadNotes">Load Notes</button>
+                <button class="btn ghost" id="p2SaveNotes"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                <button class="btn ghost" id="p2LoadNotes"><i class="fa-solid fa-folder-open"></i> Load</button>
               </div>
             </div>
 
@@ -119,9 +262,9 @@
                 <div class="mini">Prep then Speak</div>
               </div>
               <div class="row">
-                <button class="btn" id="p2StartPrepBtn">Start 1:00 Prep</button>
-                <button class="btn" id="p2StartSpeakBtn">Start 2:00 Speak</button>
-                <button class="btn danger" id="p2StopBtn" disabled>Stop</button>
+                <button class="btn" id="p2StartPrepBtn"><i class="fa-solid fa-hourglass-start"></i> Prep 1:00</button>
+                <button class="btn" id="p2StartSpeakBtn"><i class="fa-solid fa-microphone"></i> Speak 2:00</button>
+                <button class="btn danger" id="p2StopBtn" disabled><i class="fa-solid fa-stop"></i> Stop</button>
               </div>
               <div class="timer big" id="p2Timer">01:00</div>
 
@@ -146,11 +289,11 @@
 
         <div class="card">
           <h3>Record your answer (optional)</h3>
-          <p class="muted">Works in modern browsers. Allow microphone access.</p>
+          <p class="muted">Allow microphone access (recommended on Vercel HTTPS).</p>
           <div class="row">
-            <button class="btn" id="recStartBtn">Start Recording</button>
-            <button class="btn danger" id="recStopBtn" disabled>Stop</button>
-            <button class="btn ghost" id="recClearBtn" disabled>Clear</button>
+            <button class="btn" id="recStartBtn"><i class="fa-solid fa-circle"></i> Record</button>
+            <button class="btn danger" id="recStopBtn" disabled><i class="fa-solid fa-stop"></i> Stop</button>
+            <button class="btn ghost" id="recClearBtn" disabled><i class="fa-solid fa-trash"></i> Clear</button>
           </div>
           <div class="audio-area" id="audioArea">
             <div class="muted">No recording yet.</div>
@@ -183,9 +326,9 @@
           </div>
 
           <div class="row">
-            <button class="btn" id="p3NextBtn">Next Question</button>
-            <button class="btn ghost" id="p3StartBtn">Start 60s</button>
-            <button class="btn danger" id="p3StopBtn" disabled>Stop</button>
+            <button class="btn" id="p3NextBtn"><i class="fa-solid fa-forward"></i> Next</button>
+            <button class="btn ghost" id="p3StartBtn"><i class="fa-solid fa-play"></i> Start 60s</button>
+            <button class="btn danger" id="p3StopBtn" disabled><i class="fa-solid fa-stop"></i> Stop</button>
           </div>
 
           <div class="timer" id="p3Timer">01:00</div>
@@ -214,11 +357,11 @@
           <div class="pron-grid">
             <div class="pron-card">
               <h3>Chunk Drills</h3>
-              <p class="muted">Repeat in chunks (not single words). Copy rhythm.</p>
+              <p class="muted">Repeat in chunks. Copy rhythm and stress.</p>
               <div class="chunk" id="chunkText">To be honest, I’m not really into it.</div>
               <div class="row">
-                <button class="btn" id="chunkNext">Next Chunk</button>
-                <button class="btn ghost" id="chunkSlow">Slow (visual)</button>
+                <button class="btn" id="chunkNext"><i class="fa-solid fa-shuffle"></i> Next Chunk</button>
+                <button class="btn ghost" id="chunkSlow"><i class="fa-solid fa-turtle"></i> Slow</button>
               </div>
               <div class="muted small" id="chunkHint">Stress: HON-est • REAL-ly • IN-to</div>
             </div>
@@ -249,7 +392,7 @@
         <div class="card">
           <div class="row">
             <div class="field">
-              <label>Choose a Question</label>
+              <label>Choose a Prompt</label>
               <select id="fluencyQuestion"></select>
             </div>
             <div class="field">
@@ -268,9 +411,9 @@
           </div>
 
           <div class="row">
-            <button class="btn" id="fluencyStartBtn">Start 30s</button>
-            <button class="btn danger" id="fluencyStopBtn" disabled>Stop</button>
-            <button class="btn ghost" id="fluencyNextBtn">Next Prompt</button>
+            <button class="btn" id="fluencyStartBtn"><i class="fa-solid fa-play"></i> Start 30s</button>
+            <button class="btn danger" id="fluencyStopBtn" disabled><i class="fa-solid fa-stop"></i> Stop</button>
+            <button class="btn ghost" id="fluencyNextBtn"><i class="fa-solid fa-forward"></i> Next</button>
           </div>
 
           <div class="timer" id="fluencyTimer">00:30</div>
@@ -295,38 +438,31 @@
 
     <aside class="right">
       <div class="side-card">
-        <h2>Submit to Teacher</h2>
-        <p class="muted">Students fill name/group once, then submit the current question.</p>
-
-        <div class="field">
-          <label>Student name</label>
-          <input id="studentName" class="input" placeholder="e.g., Ali" />
-        </div>
-
-        <div class="field">
-          <label>Group (optional)</label>
-          <input id="studentGroup" class="input" placeholder="e.g., Even 4:30" />
-        </div>
+        <h2><i class="fa-solid fa-paper-plane"></i> Submit to Teacher</h2>
+        <p class="muted">Sends the current task + notes to the teacher.</p>
 
         <div class="row">
-          <button class="btn" id="submitBtn">Submit Current Task</button>
-          <button class="btn ghost" id="saveStudentBtn">Save</button>
+          <button class="btn" id="submitBtn">
+            <i class="fa-solid fa-paper-plane"></i>
+            Submit Current Task
+          </button>
         </div>
 
         <div class="status" id="submitStatus">Ready.</div>
 
         <div class="side-card-inner">
-          <h3>What gets submitted?</h3>
+          <h3>What will be sent?</h3>
           <ul class="bullets">
-            <li>Part + Topic + Current Question</li>
-            <li>Part 2 Notes (if any)</li>
+            <li>Name + Group + Level</li>
+            <li>Part + Topic + current question</li>
+            <li>Part 2 notes (if any)</li>
           </ul>
         </div>
       </div>
 
       <div class="side-card">
-        <h2>Saved Notes</h2>
-        <p class="muted">Part 2 notes are saved in the browser.</p>
+        <h2><i class="fa-solid fa-note-sticky"></i> Saved Notes</h2>
+        <p class="muted">Part 2 notes are saved in your browser.</p>
         <div class="saved" id="savedPreview">No saved notes yet.</div>
       </div>
     </aside>
