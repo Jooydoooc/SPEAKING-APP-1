@@ -1,0 +1,904 @@
+{
+  "sets": [
+    {
+      "id": "set01",
+      "title": "Speaking Set – 01",
+      "summary": "Part 1 / Part 2 / Part 3",
+      "parts": {
+        "part1": {
+          "topics": [
+            {
+              "title": "Hometown / Area You Live In",
+              "questions": [
+                {
+                  "id": "p1_t1_q1",
+                  "label": "Part 1 • Topic 1 • Q1",
+                  "text": "What kind of place is your hometown?",
+                  "keyVocab": ["hometown", "neighbourhood", "atmosphere", "facilities"],
+                  "study": {
+                    "collocations": [
+                      {"t":"a tight-knit community", "d":"people know and support each other"},
+                      {"t":"a peaceful atmosphere", "d":"quiet, relaxing feeling"},
+                      {"t":"well-developed facilities", "d":"good services like transport, shops"},
+                      {"t":"a place to grow up", "d":"good environment for children/teens"},
+                      {"t":"a sense of belonging", "d":"feeling connected to the place"},
+                      {"t":"a vibrant city centre", "d":"busy and lively central area"}
+                    ],
+                    "vocab": [
+                      {"t":"suburb", "d":"area outside the city centre"},
+                      {"t":"rural", "d":"countryside, not urban"},
+                      {"t":"urban", "d":"city environment"},
+                      {"t":"local residents", "d":"people who live there"},
+                      {"t":"public transport", "d":"buses, metro, etc."},
+                      {"t":"landmarks", "d":"famous places/buildings"},
+                      {"t":"cost of living", "d":"how expensive life is"}
+                    ],
+                    "phrases": [
+                      {"t":"I’d describe it as…", "d":"simple opener"},
+                      {"t":"It’s known for…", "d":"introduce a key feature"},
+                      {"t":"What I like most is…", "d":"highlight a positive point"},
+                      {"t":"Overall, it feels…", "d":"give final impression"},
+                      {"t":"It has a mix of…", "d":"compare two sides"}
+                    ],
+                    "examples": [
+                      {"t":"My hometown is quite peaceful, with friendly neighbours and decent local facilities.", "d":"short + clear"},
+                      {"t":"It’s a medium-sized city with a lively centre, but the suburbs are calm.", "d":"contrast"},
+                      {"t":"Overall, it’s a comfortable place to live because transport is convenient.", "d":"reason"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"My hometown has a ______ atmosphere, so it’s easy to relax there.", "answer":"peaceful"},
+                      {"prompt":"It’s a ______-knit community where people help each other.", "answer":"tight"},
+                      {"prompt":"The city has well-developed ______ such as transport and parks.", "answer":"facilities"}
+                    ],
+                    "definition": [
+                      {"term":"landmark", "choices":["a famous place people recognise","a type of public transport","a small garden"], "answerIndex":0},
+                      {"term":"cost of living", "choices":["how expensive life is","how many trees there are","how far the city is"], "answerIndex":0},
+                      {"term":"suburb", "choices":["an area outside the city centre","a village in the mountains","a shopping mall"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"peaceful atmosphere", "rightChoices":["quiet and relaxing","crowded and noisy","unsafe at night"], "answer":"quiet and relaxing"},
+                      {"left":"well-developed facilities", "rightChoices":["good services and infrastructure","very old buildings only","no transport options"], "answer":"good services and infrastructure"},
+                      {"left":"sense of belonging", "rightChoices":["feeling connected","feeling bored","feeling lost"], "answer":"feeling connected"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence describing your hometown.",
+                      "mustUseAny": ["peaceful", "community", "facilities", "atmosphere", "neighbourhood"],
+                      "tips": [
+                        "Start with: “My hometown is…”",
+                        "Include one reason: because / since",
+                        "Add one detail: transport, parks, people"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"My hometown is a fairly calm place with a friendly atmosphere. It’s not huge, but it has the facilities people need, like parks and good transport. Overall, it feels comfortable and safe.",
+                    "advancedAcademic9":"My hometown is a mid-sized urban area with a balanced lifestyle. It offers well-developed facilities and a strong sense of community, which makes daily life convenient. Overall, it’s a practical place to live with a pleasant atmosphere.",
+                    "fluentStory9":"My hometown feels like a place that knows you. I grew up in a quiet neighbourhood where neighbours greeted each other and parks were always full in the evenings. Even now, when I visit, the atmosphere instantly makes me feel at home."
+                  }
+                },
+                {
+                  "id": "p1_t1_q2",
+                  "label": "Part 1 • Topic 1 • Q2",
+                  "text": "Are there many trees or parks in your area?",
+                  "keyVocab": ["parks", "green spaces", "trees", "neighbourhood"],
+                  "study": {
+                    "collocations": [
+                      {"t":"green spaces", "d":"parks and areas with plants"},
+                      {"t":"tree-lined streets", "d":"roads with trees on both sides"},
+                      {"t":"a small public park", "d":"local park for residents"},
+                      {"t":"fresh air", "d":"clean, pleasant air"},
+                      {"t":"a place to unwind", "d":"relax after stress"},
+                      {"t":"within walking distance", "d":"close enough to walk"}
+                    ],
+                    "vocab": [
+                      {"t":"greenery", "d":"plants and trees in an area"},
+                      {"t":"playground", "d":"area for children to play"},
+                      {"t":"jogging path", "d":"path for running"},
+                      {"t":"shade", "d":"cool area out of the sun"},
+                      {"t":"maintenance", "d":"keeping a place clean and in good condition"},
+                      {"t":"crowded", "d":"full of people"}
+                    ],
+                    "phrases": [
+                      {"t":"Actually, yes…", "d":"natural opener"},
+                      {"t":"Not many, but…", "d":"balanced answer"},
+                      {"t":"They’re well-maintained.", "d":"quality description"},
+                      {"t":"It makes the area feel…", "d":"effect"},
+                      {"t":"Especially on weekends.", "d":"time detail"}
+                    ],
+                    "examples": [
+                      {"t":"Yes, there are a few parks within walking distance, so people go there to relax.", "d":"clear"},
+                      {"t":"Not many, but the main park is well-maintained and has plenty of trees.", "d":"balanced"},
+                      {"t":"Tree-lined streets make the neighbourhood feel fresher in summer.", "d":"detail"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"There’s a park ______ walking distance from my house.", "answer":"within"},
+                      {"prompt":"The streets are ______-lined, which looks beautiful in spring.", "answer":"tree"},
+                      {"prompt":"I go there to ______ after work.", "answer":"unwind"}
+                    ],
+                    "definition": [
+                      {"term":"shade", "choices":["a cool place out of the sun","a noisy street market","a type of tree"], "answerIndex":0},
+                      {"term":"maintenance", "choices":["keeping something in good condition","planting flowers once","cutting trees illegally"], "answerIndex":0},
+                      {"term":"greenery", "choices":["plants and trees in an area","buildings and roads only","traffic and noise"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"green spaces", "rightChoices":["parks and planted areas","shopping centres","factories"], "answer":"parks and planted areas"},
+                      {"left":"well-maintained", "rightChoices":["clean and looked after","dirty and broken","far away"], "answer":"clean and looked after"},
+                      {"left":"crowded", "rightChoices":["full of people","quiet and empty","unsafe"], "answer":"full of people"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence about parks/trees in your area.",
+                      "mustUseAny": ["green spaces", "trees", "park", "within walking distance", "fresh air"],
+                      "tips": [
+                        "Mention quantity: a few / many / not many",
+                        "Add a benefit: fresh air / less stress",
+                        "Add a time: evenings / weekends"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"Yes, there are a few parks near my home, and some streets are tree-lined. They’re great for fresh air, especially after a long day. On weekends, they can get a bit crowded.",
+                    "advancedAcademic9":"There are several green spaces in my neighbourhood, and they’re fairly well-maintained. The trees provide shade and improve the overall atmosphere, particularly in summer. It’s a small but valuable part of local life.",
+                    "fluentStory9":"Yes, and I’m glad about that. There’s a small park within walking distance, and in the evenings you can see people jogging or sitting under the trees. It’s the kind of place that helps you unwind without travelling far."
+                  }
+                },
+                {
+                  "id": "p1_t1_q3",
+                  "label": "Part 1 • Topic 1 • Q3",
+                  "text": "How has your hometown changed over the years?",
+                  "keyVocab": ["changed", "development", "infrastructure", "crowded"],
+                  "study": {
+                    "collocations": [
+                      {"t":"rapid development", "d":"fast growth and change"},
+                      {"t":"improved infrastructure", "d":"better roads, transport, services"},
+                      {"t":"new residential areas", "d":"more housing"},
+                      {"t":"more crowded", "d":"more people and traffic"},
+                      {"t":"a modern skyline", "d":"new tall buildings"},
+                      {"t":"lose green areas", "d":"parks/trees reduced"}
+                    ],
+                    "vocab": [
+                      {"t":"infrastructure", "d":"roads, bridges, services"},
+                      {"t":"traffic congestion", "d":"too many cars on roads"},
+                      {"t":"construction", "d":"building work"},
+                      {"t":"facilities", "d":"places/services people use"},
+                      {"t":"population", "d":"number of people living there"},
+                      {"t":"expand", "d":"grow bigger"}
+                    ],
+                    "phrases": [
+                      {"t":"Over the years, …", "d":"time frame"},
+                      {"t":"The biggest change is…", "d":"focus"},
+                      {"t":"On the downside, …", "d":"balanced view"},
+                      {"t":"It used to be…, but now…", "d":"contrast"},
+                      {"t":"Overall, it has become…", "d":"summary"}
+                    ],
+                    "examples": [
+                      {"t":"It used to be quieter, but now it’s more crowded because the population has grown.", "d":"contrast"},
+                      {"t":"Infrastructure has improved a lot, especially roads and public transport.", "d":"focus"},
+                      {"t":"On the downside, some green areas have disappeared due to construction.", "d":"balance"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"Over the years, my hometown has ______ rapidly.", "answer":"developed"},
+                      {"prompt":"Traffic ______ has become worse in the city centre.", "answer":"congestion"},
+                      {"prompt":"Some green areas have disappeared due to ______.", "answer":"construction"}
+                    ],
+                    "definition": [
+                      {"term":"infrastructure", "choices":["roads and public services","a small garden","a type of building material"], "answerIndex":0},
+                      {"term":"expand", "choices":["grow bigger","become quieter","lose population"], "answerIndex":0},
+                      {"term":"traffic congestion", "choices":["too many cars causing slow traffic","clean streets","wide parks"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"rapid development", "rightChoices":["fast growth","slow decline","no change"], "answer":"fast growth"},
+                      {"left":"on the downside", "rightChoices":["a negative point","a strong conclusion","a greeting"], "answer":"a negative point"},
+                      {"left":"improved infrastructure", "rightChoices":["better roads/services","more noise","less population"], "answer":"better roads/services"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence comparing the past and present of your hometown.",
+                      "mustUseAny": ["used to", "but now", "development", "infrastructure", "crowded"],
+                      "tips": [
+                        "Use: used to / but now",
+                        "Add one reason: because / due to",
+                        "Mention one result: more traffic / better facilities"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"It has changed quite a lot over the years. There are more new buildings and better roads than before. However, it’s also more crowded now, especially in the city centre.",
+                    "advancedAcademic9":"My hometown has experienced noticeable development, particularly in infrastructure and public facilities. While this has improved convenience, it has also led to heavier traffic and a more crowded lifestyle. Overall, it feels more modern but less calm.",
+                    "fluentStory9":"When I was younger, it felt quieter and simpler. Now there’s construction everywhere, new roads, and more busy streets. It’s exciting to see progress, but I do miss the older, calmer atmosphere."
+                  }
+                },
+                {
+                  "id": "p1_t1_q4",
+                  "label": "Part 1 • Topic 1 • Q4",
+                  "text": "Do you think your hometown is a good place for young people to live?",
+                  "keyVocab": ["young people", "opportunities", "cost of living", "entertainment"],
+                  "study": {
+                    "collocations": [
+                      {"t":"job opportunities", "d":"chances to find work"},
+                      {"t":"affordable cost of living", "d":"not too expensive"},
+                      {"t":"a safe environment", "d":"low risk/crime"},
+                      {"t":"social life", "d":"activities with friends"},
+                      {"t":"limited entertainment options", "d":"not many places to go"},
+                      {"t":"a good place to settle down", "d":"comfortable for long-term life"}
+                    ],
+                    "vocab": [
+                      {"t":"career prospects", "d":"future job chances"},
+                      {"t":"nightlife", "d":"evening entertainment"},
+                      {"t":"commute", "d":"travel to work/school"},
+                      {"t":"facilities", "d":"services/places"},
+                      {"t":"budget-friendly", "d":"not expensive"},
+                      {"t":"vibrant", "d":"lively and exciting"}
+                    ],
+                    "phrases": [
+                      {"t":"It depends on…", "d":"balanced answer"},
+                      {"t":"For students, …", "d":"specific group"},
+                      {"t":"If someone wants…, then…", "d":"conditional"},
+                      {"t":"That said, …", "d":"contrast"},
+                      {"t":"In general, …", "d":"overall view"}
+                    ],
+                    "examples": [
+                      {"t":"It’s budget-friendly and safe, which is good for students and young families.", "d":"positive"},
+                      {"t":"That said, job opportunities are limited, so many people move to bigger cities.", "d":"contrast"},
+                      {"t":"If someone wants nightlife, they might find it boring.", "d":"conditional"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"My hometown is ______-friendly, so students can manage expenses.", "answer":"budget"},
+                      {"prompt":"There aren’t many job ______, so people often move away.", "answer":"opportunities"},
+                      {"prompt":"If someone wants a vibrant ______ life, a bigger city is better.", "answer":"social"}
+                    ],
+                    "definition": [
+                      {"term":"career prospects", "choices":["future job chances","types of trees","public parks"], "answerIndex":0},
+                      {"term":"nightlife", "choices":["evening entertainment","morning exercise","family meals"], "answerIndex":0},
+                      {"term":"commute", "choices":["travel to work/school","plant flowers","build roads"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"safe environment", "rightChoices":["low risk and secure","expensive housing","busy nightlife"], "answer":"low risk and secure"},
+                      {"left":"limited entertainment options", "rightChoices":["not many places to go","many cinemas and clubs","excellent transport"], "answer":"not many places to go"},
+                      {"left":"affordable cost of living", "rightChoices":["not too expensive","very crowded","no parks"], "answer":"not too expensive"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence giving a balanced opinion about young people living in your hometown.",
+                      "mustUseAny": ["depends", "that said", "opportunities", "safe", "cost of living"],
+                      "tips": [
+                        "Give one positive + one limitation",
+                        "Use: That said / However",
+                        "Keep it 12–20 words"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"It depends on what they want. It’s safe and the cost of living is reasonable, so it’s comfortable for students. That said, job opportunities and entertainment are limited.",
+                    "advancedAcademic9":"Overall, it can be a good option for young people because living costs are manageable and the environment is relatively safe. However, career prospects may be limited compared to larger cities, so ambitious people often relocate. It’s practical, but not highly dynamic.",
+                    "fluentStory9":"For many young people, it’s a nice starting point. You can study, save money, and enjoy a calm lifestyle with friends. But if someone is chasing bigger opportunities, they usually end up moving to a larger city after a few years."
+                  }
+                }
+              ]
+            },
+            {
+              "title": "Plants",
+              "questions": [
+                {
+                  "id": "p1_t2_q1",
+                  "label": "Part 1 • Topic 2 • Q1",
+                  "text": "Do you like being around places with a lot of trees or greenery?",
+                  "keyVocab": ["greenery", "trees", "relaxing", "fresh air"],
+                  "study": {
+                    "collocations": [
+                      {"t":"surrounded by greenery", "d":"many plants around you"},
+                      {"t":"clear my head", "d":"feel mentally refreshed"},
+                      {"t":"reduce stress", "d":"feel calmer"},
+                      {"t":"fresh air", "d":"clean air outdoors"},
+                      {"t":"a calming effect", "d":"makes you relaxed"},
+                      {"t":"spend time outdoors", "d":"be outside regularly"}
+                    ],
+                    "vocab": [
+                      {"t":"nature", "d":"the natural world"},
+                      {"t":"greenery", "d":"plants and trees"},
+                      {"t":"refreshing", "d":"makes you feel better"},
+                      {"t":"scenery", "d":"the view/landscape"},
+                      {"t":"quiet corner", "d":"peaceful place"},
+                      {"t":"breathe", "d":"take air into lungs"}
+                    ],
+                    "phrases": [
+                      {"t":"Definitely, …", "d":"strong yes"},
+                      {"t":"It helps me…", "d":"benefit"},
+                      {"t":"Whenever I can, …", "d":"frequency"},
+                      {"t":"I feel more…", "d":"result"},
+                      {"t":"It’s especially nice when…", "d":"condition"}
+                    ],
+                    "examples": [
+                      {"t":"Definitely. Being surrounded by greenery helps me reduce stress and relax.", "d":"clear"},
+                      {"t":"I find it refreshing because the air feels cleaner and cooler.", "d":"reason"},
+                      {"t":"Whenever I can, I choose parks over noisy streets.", "d":"preference"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"Being around trees has a ______ effect on me.", "answer":"calming"},
+                      {"prompt":"I go outside to get some ______ air.", "answer":"fresh"},
+                      {"prompt":"Green spaces help me ______ my head.", "answer":"clear"}
+                    ],
+                    "definition": [
+                      {"term":"refreshing", "choices":["making you feel better and calmer","full of traffic","very expensive"], "answerIndex":0},
+                      {"term":"scenery", "choices":["the view/landscape","a type of plant","a shopping area"], "answerIndex":0},
+                      {"term":"reduce stress", "choices":["feel calmer","feel more tired","travel far"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"calming effect", "rightChoices":["makes you relaxed","makes you angry","makes you hungry"], "answer":"makes you relaxed"},
+                      {"left":"clear my head", "rightChoices":["feel mentally refreshed","forget my name","become sleepy"], "answer":"feel mentally refreshed"},
+                      {"left":"spend time outdoors", "rightChoices":["be outside regularly","stay at home all day","work in an office"], "answer":"be outside regularly"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence about how greenery affects you.",
+                      "mustUseAny": ["reduce stress", "calming", "fresh air", "greenery", "clear my head"],
+                      "tips": [
+                        "Use one feeling word: calm / relaxed",
+                        "Add a reason: because…",
+                        "End with a full stop."
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"Yes, definitely. Being around greenery helps me relax and clear my head. I feel calmer when I spend time in parks or near trees.",
+                    "advancedAcademic9":"Yes, I do. Greenery has a calming effect and it improves my mood, especially after a busy day. I also think fresh air and natural scenery support mental well-being.",
+                    "fluentStory9":"Absolutely. Even a short walk through a tree-lined street makes me feel lighter. When I’m stressed, I go to a quiet green corner and I usually leave feeling refreshed."
+                  }
+                },
+                {
+                  "id": "p1_t2_q2",
+                  "label": "Part 1 • Topic 2 • Q2",
+                  "text": "Have you ever planted a tree or a flower yourself?",
+                  "keyVocab": ["plant", "flower", "tree", "take care of"],
+                  "study": {
+                    "collocations": [
+                      {"t":"plant a flower", "d":"put it in soil so it grows"},
+                      {"t":"take care of it", "d":"water and protect it"},
+                      {"t":"see it grow", "d":"watch progress over time"},
+                      {"t":"a small garden", "d":"home garden area"},
+                      {"t":"a satisfying hobby", "d":"enjoyable activity"},
+                      {"t":"water it regularly", "d":"consistent routine"}
+                    ],
+                    "vocab": [
+                      {"t":"seed", "d":"small beginning of a plant"},
+                      {"t":"soil", "d":"ground for plants"},
+                      {"t":"watering", "d":"giving water"},
+                      {"t":"grow", "d":"develop over time"},
+                      {"t":"decorate", "d":"make a place look nicer"},
+                      {"t":"routine", "d":"regular habit"}
+                    ],
+                    "phrases": [
+                      {"t":"Yes, I have.", "d":"direct answer"},
+                      {"t":"Not personally, but…", "d":"honest answer"},
+                      {"t":"It was surprisingly…", "d":"natural opinion"},
+                      {"t":"I found it…", "d":"personal feeling"},
+                      {"t":"It made me…", "d":"result"}
+                    ],
+                    "examples": [
+                      {"t":"Yes, I’ve planted a few flowers at home, and it was surprisingly satisfying.", "d":"natural"},
+                      {"t":"I had to water them regularly, but it was nice to see them grow.", "d":"routine"},
+                      {"t":"It also made my room feel more alive.", "d":"result"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"I planted a flower in the ______ and watered it regularly.", "answer":"soil"},
+                      {"prompt":"It’s nice to see a plant ______ over time.", "answer":"grow"},
+                      {"prompt":"Taking care of plants can become a daily ______.", "answer":"routine"}
+                    ],
+                    "definition": [
+                      {"term":"seed", "choices":["the beginning of a plant","a type of park","a leaf on a tree"], "answerIndex":0},
+                      {"term":"soil", "choices":["ground for plants","a city centre","a pot of water"], "answerIndex":0},
+                      {"term":"satisfying", "choices":["pleasant and rewarding","dangerous","boring"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"water it regularly", "rightChoices":["give water often","cut it quickly","leave it in the dark"], "answer":"give water often"},
+                      {"left":"see it grow", "rightChoices":["watch progress","forget about it","sell it"], "answer":"watch progress"},
+                      {"left":"a satisfying hobby", "rightChoices":["enjoyable activity","paid job","school subject"], "answer":"enjoyable activity"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence about planting something.",
+                      "mustUseAny": ["planted", "water", "grow", "flower", "tree"],
+                      "tips": [
+                        "Use past tense: planted / watered",
+                        "Add one time phrase: last year / recently",
+                        "Keep it clear and simple"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"Yes, I have. I planted a couple of flowers at home and watered them regularly. It was nice to see them grow little by little.",
+                    "advancedAcademic9":"Yes, I’ve planted flowers before, and I found it surprisingly rewarding. It requires a simple routine, like watering and enough sunlight, but the result is enjoyable. It also makes a home feel more welcoming.",
+                    "fluentStory9":"I have, actually. I planted a small flower in a pot and checked it every morning like a mini project. Watching it grow made me feel proud, even though it was a small thing."
+                  }
+                },
+                {
+                  "id": "p1_t2_q3",
+                  "label": "Part 1 • Topic 2 • Q3",
+                  "text": "Why do you think people like to grow plants at home?",
+                  "keyVocab": ["plants", "home", "calm", "responsibility"],
+                  "study": {
+                    "collocations": [
+                      {"t":"a calm atmosphere", "d":"peaceful feeling at home"},
+                      {"t":"make a home feel cosy", "d":"warm and comfortable"},
+                      {"t":"reduce stress", "d":"feel calmer"},
+                      {"t":"a sense of responsibility", "d":"feeling in charge of care"},
+                      {"t":"improve air quality", "d":"cleaner indoor air"},
+                      {"t":"a simple daily habit", "d":"small routine"}
+                    ],
+                    "vocab": [
+                      {"t":"indoor plants", "d":"plants kept inside"},
+                      {"t":"decorate", "d":"make the room look nicer"},
+                      {"t":"routine", "d":"regular habit"},
+                      {"t":"mood", "d":"your feeling"},
+                      {"t":"relaxation", "d":"rest and calm"},
+                      {"t":"environment", "d":"surroundings"}
+                    ],
+                    "phrases": [
+                      {"t":"I think it’s because…", "d":"explain reason"},
+                      {"t":"For one thing, …", "d":"first reason"},
+                      {"t":"Another reason is…", "d":"second reason"},
+                      {"t":"It also helps…", "d":"extra benefit"},
+                      {"t":"In a way, …", "d":"soft explanation"}
+                    ],
+                    "examples": [
+                      {"t":"Plants make a home feel cosy and create a calm atmosphere.", "d":"effect"},
+                      {"t":"Taking care of them gives people a sense of responsibility.", "d":"reason"},
+                      {"t":"They can also improve mood and reduce stress after work.", "d":"benefit"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"Indoor plants can create a ______ atmosphere.", "answer":"calm"},
+                      {"prompt":"Looking after plants gives people a sense of ______.", "answer":"responsibility"},
+                      {"prompt":"Some people grow plants to ______ their homes.", "answer":"decorate"}
+                    ],
+                    "definition": [
+                      {"term":"cosy", "choices":["warm and comfortable","large and empty","noisy and crowded"], "answerIndex":0},
+                      {"term":"air quality", "choices":["how clean the air is","how many rooms a house has","how bright the walls are"], "answerIndex":0},
+                      {"term":"responsibility", "choices":["a duty to take care of something","a type of plant","a city rule"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"calm atmosphere", "rightChoices":["peaceful feeling","loud party","busy traffic"], "answer":"peaceful feeling"},
+                      {"left":"make a home feel cosy", "rightChoices":["warm and comfortable","cold and empty","unsafe"], "answer":"warm and comfortable"},
+                      {"left":"reduce stress", "rightChoices":["feel calmer","feel more nervous","get lost"], "answer":"feel calmer"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence explaining why people grow plants at home.",
+                      "mustUseAny": ["cosy", "calm", "reduce stress", "responsibility", "decorate"],
+                      "tips": [
+                        "Use: because / since",
+                        "Give 1–2 reasons",
+                        "Avoid very long sentences"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"I think it’s because plants make a home feel cosy and calm. They also help people relax after a stressful day. Taking care of them can be enjoyable too.",
+                    "advancedAcademic9":"People often grow plants at home because they improve the indoor environment and create a calmer atmosphere. In addition, caring for plants can reduce stress and build a sense of responsibility. It’s a simple habit with positive effects.",
+                    "fluentStory9":"I think plants change the mood of a room. A few green leaves on a shelf can make a place feel alive and comfortable. Plus, watering them becomes a small routine that helps people slow down and relax."
+                  }
+                },
+                {
+                  "id": "p1_t2_q4",
+                  "label": "Part 1 • Topic 2 • Q4",
+                  "text": "Are there any famous gardens or parks in your city?",
+                  "keyVocab": ["park", "garden", "well-known", "weekends"],
+                  "study": {
+                    "collocations": [
+                      {"t":"a well-known park", "d":"popular public place"},
+                      {"t":"at weekends", "d":"on Saturday/Sunday"},
+                      {"t":"a popular spot", "d":"place many people visit"},
+                      {"t":"perfect for walking", "d":"good for strolling"},
+                      {"t":"family-friendly", "d":"good for children"},
+                      {"t":"well-maintained", "d":"clean and looked after"}
+                    ],
+                    "vocab": [
+                      {"t":"central", "d":"in the middle of the city"},
+                      {"t":"entrance", "d":"way in"},
+                      {"t":"fountain", "d":"water decoration"},
+                      {"t":"flowerbeds", "d":"areas with planted flowers"},
+                      {"t":"events", "d":"special activities"},
+                      {"t":"tourists", "d":"visitors from other places"}
+                    ],
+                    "phrases": [
+                      {"t":"Yes, there is…", "d":"direct answer"},
+                      {"t":"It’s quite popular because…", "d":"reason"},
+                      {"t":"People usually…", "d":"typical activities"},
+                      {"t":"It’s especially nice in…", "d":"season detail"},
+                      {"t":"If you visit, you can…", "d":"invitation"}
+                    ],
+                    "examples": [
+                      {"t":"Yes, there’s a well-known central park, and it’s very popular at weekends.", "d":"direct"},
+                      {"t":"It’s well-maintained with flowerbeds, walking paths, and a small fountain.", "d":"details"},
+                      {"t":"People go there to relax, jog, and spend time with family.", "d":"activities"}
+                    ]
+                  },
+                  "practice": {
+                    "gapFilling": [
+                      {"prompt":"There’s a ______-known park in the centre of my city.", "answer":"well"},
+                      {"prompt":"It’s a popular ______ at weekends.", "answer":"spot"},
+                      {"prompt":"The park is well-______, so it looks clean.", "answer":"maintained"}
+                    ],
+                    "definition": [
+                      {"term":"flowerbeds", "choices":["areas with planted flowers","a type of road","a group of trees only"], "answerIndex":0},
+                      {"term":"tourists", "choices":["visitors from other places","local residents","park workers"], "answerIndex":0},
+                      {"term":"family-friendly", "choices":["good for children and families","unsafe at night","too expensive"], "answerIndex":0}
+                    ],
+                    "matching": [
+                      {"left":"popular spot", "rightChoices":["place many people visit","quiet private house","closed factory"], "answer":"place many people visit"},
+                      {"left":"perfect for walking", "rightChoices":["good for strolling","good for driving","good for sleeping"], "answer":"good for strolling"},
+                      {"left":"well-maintained", "rightChoices":["clean and cared for","old and broken","dangerous"], "answer":"clean and cared for"}
+                    ],
+                    "makingSentences": {
+                      "prompt":"Write one sentence about a famous park/garden in your city.",
+                      "mustUseAny": ["well-known", "popular", "at weekends", "walking", "family-friendly"],
+                      "tips": [
+                        "Name the place (or say “a central park”)",
+                        "Add 1–2 features: fountain, paths, flowerbeds",
+                        "Keep it natural"
+                      ]
+                    }
+                  },
+                  "samples": {
+                    "naturalSimple9":"Yes, there’s a well-known central park in my city. It’s popular at weekends because it’s clean and family-friendly. People go there to walk, jog, and relax.",
+                    "advancedAcademic9":"Yes, my city has a well-known public park that attracts both residents and tourists. It’s well-maintained, with walking paths, flowerbeds, and open spaces for leisure. It’s a convenient place to unwind without leaving the city.",
+                    "fluentStory9":"Yes, there is. On weekends it feels like everyone ends up there—families, runners, and friends. I like it because it’s peaceful, and a short walk there instantly improves my mood."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "part2": {
+          "cueCard": {
+            "id": "p2_cc1",
+            "label": "Part 2",
+            "text": "Describe a place with a lot of trees.\nYou should say:\nWhere this place is located\nWhat kinds of trees or plants are there\nWhat people usually do in this place\nAnd explain how you feel when you spend time there",
+            "keyVocab": ["trees", "park", "fresh air", "relax"],
+            "study": {
+              "collocations": [
+                {"t":"on the outskirts", "d":"outside the city centre"},
+                {"t":"tree-lined paths", "d":"paths with trees along them"},
+                {"t":"a well-maintained park", "d":"clean and cared for"},
+                {"t":"breathe fresh air", "d":"feel healthier outdoors"},
+                {"t":"unwind and recharge", "d":"relax and regain energy"},
+                {"t":"a peaceful escape", "d":"break from noise and routine"}
+              ],
+              "vocab": [
+                {"t":"pine trees", "d":"evergreen trees"},
+                {"t":"poplar trees", "d":"tall thin trees"},
+                {"t":"flowerbeds", "d":"areas with flowers"},
+                {"t":"walking trails", "d":"paths for walking"},
+                {"t":"shade", "d":"cool area out of sun"},
+                {"t":"wildlife", "d":"animals living there"}
+              ],
+              "phrases": [
+                {"t":"I’d like to describe…", "d":"clear opening"},
+                {"t":"It’s located…", "d":"location detail"},
+                {"t":"In terms of plants…", "d":"describe trees/flowers"},
+                {"t":"People usually…", "d":"activities"},
+                {"t":"Personally, I feel…", "d":"feelings"},
+                {"t":"Overall, it’s…", "d":"closing"}
+              ],
+              "examples": [
+                {"t":"It’s a large park on the outskirts of my city with tree-lined paths and fresh air.", "d":"location + features"},
+                {"t":"People go there to jog, cycle, and sit under the shade to chat.", "d":"activities"},
+                {"t":"I feel calm and refreshed because it helps me unwind from daily stress.", "d":"feelings"}
+              ]
+            },
+            "practice": {
+              "gapFilling": [
+                {"prompt":"The park is located on the ______ of the city.", "answer":"outskirts"},
+                {"prompt":"There are tree-______ paths that are perfect for walking.", "answer":"lined"},
+                {"prompt":"When I go there, I can ______ and recharge.", "answer":"unwind"}
+              ],
+              "definition": [
+                {"term":"outskirts", "choices":["outside the city centre","inside a building","a type of plant"], "answerIndex":0},
+                {"term":"trail", "choices":["a path for walking","a shop in a park","a kind of tree"], "answerIndex":0},
+                {"term":"wildlife", "choices":["animals living in nature","street lights","public transport"], "answerIndex":0}
+              ],
+              "matching": [
+                {"left":"peaceful escape", "rightChoices":["break from noise","crowded highway","busy office"], "answer":"break from noise"},
+                {"left":"breathe fresh air", "rightChoices":["feel healthier outdoors","stay indoors","drive fast"], "answer":"feel healthier outdoors"},
+                {"left":"well-maintained", "rightChoices":["clean and cared for","old and broken","too expensive"], "answer":"clean and cared for"}
+              ],
+              "makingSentences": {
+                "prompt":"Write one sentence describing the place (location + trees + activity).",
+                "mustUseAny": ["on the outskirts", "tree-lined", "fresh air", "unwind", "well-maintained"],
+                "tips": [
+                  "Include location (where)",
+                  "Mention trees/plants (what)",
+                  "Add one activity (what people do)"
+                ]
+              }
+            },
+            "samples": {
+              "naturalSimple9":"Mini-outline:\n- Where: a large park near my neighbourhood\n- Trees/plants: tall trees, small flowerbeds\n- Activities: walking, jogging, sitting\n- Feelings: calm and refreshed\n\nFull answer:\nI’d like to describe a large park near my neighbourhood that has a lot of trees. It’s located not far from the city centre, but it feels like a peaceful escape from traffic and noise. The park has tall trees that create a lot of shade, as well as small flowerbeds along the paths.\n\nPeople usually go there to walk, jog, and spend time with friends or family. In the evenings, it’s common to see people sitting on benches and chatting, while others cycle along the trails. Personally, I feel calm and refreshed when I’m there because the fresh air helps me clear my head. Overall, it’s my favourite place to unwind and recharge after a busy day.",
+              "advancedAcademic9":"Mini-outline:\n- Where: a well-maintained public park on the outskirts\n- Trees/plants: pine/poplar, greenery, flowerbeds\n- Activities: exercise, leisure, family time\n- Feelings: mentally refreshed\n\nFull answer:\nI’d like to talk about a well-maintained public park on the outskirts of my city. It’s spacious and carefully designed, with tree-lined paths and open areas where people can relax. In terms of plants, there are pine and poplar trees, plenty of greenery, and neat flowerbeds that make the park look attractive throughout the year.\n\nPeople usually visit this place for exercise and leisure. Some residents jog or cycle along the trails, while others sit under the trees to read, talk, or simply enjoy the scenery. Families often bring children because it’s safe and comfortable. Personally, I feel mentally refreshed when I spend time there, because it reduces stress and helps me switch off from daily pressure. Overall, it’s an important green space that improves the quality of life in the city.",
+              "fluentStory9":"Mini-outline:\n- Where: a park I visit after work\n- Trees/plants: tall trees, cool shade, green corners\n- Activities: walking, thinking, meeting friends\n- Feelings: calm + energized\n\nFull answer:\nI’d like to describe a park I often visit after work, especially when I need a break. It’s a quiet place a short distance from my home, and the first thing you notice is the tall trees and the cool shade they create. There are also little green corners and flowerbeds along the paths, which make the whole area feel alive.\n\nPeople use the park in different ways. Some come for a quick jog, others walk slowly and talk, and a few people just sit and watch the day go by. I usually walk there for twenty minutes, breathe the fresh air, and think about my plans. Personally, I always feel calmer and more energized afterwards, because the natural atmosphere helps me reset. For me, it’s a simple place, but it makes a big difference to my mood."
+            }
+          }
+        },
+        "part3": {
+          "questions": [
+            {
+              "id": "p3_q1",
+              "label": "Part 3 • Q1",
+              "text": "Why do people like spending time in natural places?",
+              "keyVocab": ["nature", "stress", "fresh air", "relax"],
+              "study": {
+                "collocations": [
+                  {"t":"escape from routine", "d":"break from daily life"},
+                  {"t":"reduce stress", "d":"feel calmer"},
+                  {"t":"fresh air", "d":"clean outdoor air"},
+                  {"t":"mental well-being", "d":"health of the mind"},
+                  {"t":"recharge energy", "d":"feel strong again"},
+                  {"t":"connect with nature", "d":"feel close to natural environment"}
+                ],
+                "vocab": [
+                  {"t":"routine", "d":"daily pattern"},
+                  {"t":"well-being", "d":"overall health"},
+                  {"t":"noise pollution", "d":"unwanted loud sound"},
+                  {"t":"scenery", "d":"natural view"},
+                  {"t":"balance", "d":"stable state"},
+                  {"t":"outdoors", "d":"outside"}
+                ],
+                "phrases": [
+                  {"t":"One reason is that…", "d":"reason 1"},
+                  {"t":"Another factor is…", "d":"reason 2"},
+                  {"t":"For example, …", "d":"give example"},
+                  {"t":"As a result, …", "d":"result"},
+                  {"t":"In general, …", "d":"overall view"}
+                ],
+                "examples": [
+                  {"t":"People escape from routine and reduce stress by spending time outdoors.", "d":"reason"},
+                  {"t":"Fresh air and scenery can improve mental well-being.", "d":"benefit"},
+                  {"t":"As a result, they feel more balanced and refreshed.", "d":"result"}
+                ]
+              },
+              "practice": {
+                "gapFilling": [
+                  {"prompt":"Nature helps people reduce ______ after a busy week.", "answer":"stress"},
+                  {"prompt":"Many people go outdoors to breathe ______ air.", "answer":"fresh"},
+                  {"prompt":"Natural places offer an escape from daily ______.", "answer":"routine"}
+                ],
+                "definition": [
+                  {"term":"well-being", "choices":["overall health and happiness","a type of park","a city problem"], "answerIndex":0},
+                  {"term":"noise pollution", "choices":["unwanted loud sound","clean air","green plants"], "answerIndex":0},
+                  {"term":"balance", "choices":["a stable state","a tall tree","a busy street"], "answerIndex":0}
+                ],
+                "matching": [
+                  {"left":"escape from routine", "rightChoices":["break from daily life","stay at work","travel by bus"], "answer":"break from daily life"},
+                  {"left":"connect with nature", "rightChoices":["feel close to outdoors","watch TV","drive fast"], "answer":"feel close to outdoors"},
+                  {"left":"recharge energy", "rightChoices":["feel strong again","lose sleep","get sick"], "answer":"feel strong again"}
+                ],
+                "makingSentences": {
+                  "prompt":"Write one sentence explaining one reason people enjoy natural places.",
+                  "mustUseAny": ["reduce stress", "fresh air", "routine", "well-being", "balanced"],
+                  "tips": [
+                    "State one reason clearly",
+                    "Add one example if possible",
+                    "Avoid repeating the same word many times"
+                  ]
+                }
+              },
+              "samples": {
+                "naturalSimple9":"People enjoy natural places because they can relax and reduce stress. Fresh air and quiet surroundings help them clear their minds. It’s a simple way to feel better after a busy week.",
+                "advancedAcademic9":"Natural places offer an escape from routine and noise, which supports mental well-being. In addition, fresh air and pleasant scenery can improve mood and concentration. As a result, people feel more balanced and recharged.",
+                "fluentStory9":"I think nature gives people a reset button. When you leave traffic and screens behind, your mind slows down and you breathe differently. Even a short walk in a quiet green area can reduce stress and make you feel like yourself again."
+              }
+            },
+            {
+              "id": "p3_q2",
+              "label": "Part 3 • Q2",
+              "text": "Do you think it’s important to plant more trees in cities?",
+              "keyVocab": ["trees", "cities", "air quality", "shade"],
+              "study": {
+                "collocations": [
+                  {"t":"improve air quality", "d":"make air cleaner"},
+                  {"t":"provide shade", "d":"protect from sun"},
+                  {"t":"reduce urban heat", "d":"cool the city"},
+                  {"t":"public green spaces", "d":"parks and planted areas"},
+                  {"t":"health benefits", "d":"positive effects on health"},
+                  {"t":"make cities more liveable", "d":"better to live in"}
+                ],
+                "vocab": [
+                  {"t":"air pollution", "d":"dirty air"},
+                  {"t":"heatwave", "d":"very hot period"},
+                  {"t":"carbon dioxide", "d":"gas linked to warming"},
+                  {"t":"neighbourhood", "d":"local area"},
+                  {"t":"residents", "d":"people who live there"},
+                  {"t":"sustainable", "d":"good for the future"}
+                ],
+                "phrases": [
+                  {"t":"Yes, for several reasons.", "d":"structured start"},
+                  {"t":"Firstly, …", "d":"reason 1"},
+                  {"t":"Secondly, …", "d":"reason 2"},
+                  {"t":"In the long term, …", "d":"future impact"},
+                  {"t":"So overall, …", "d":"conclusion"}
+                ],
+                "examples": [
+                  {"t":"Trees improve air quality and provide shade during hot summers.", "d":"benefit"},
+                  {"t":"They also reduce urban heat and make streets more comfortable.", "d":"effect"},
+                  {"t":"So overall, planting trees makes cities more liveable.", "d":"conclusion"}
+                ]
+              },
+              "practice": {
+                "gapFilling": [
+                  {"prompt":"Trees can improve air ______ in crowded cities.", "answer":"quality"},
+                  {"prompt":"They provide ______ during hot weather.", "answer":"shade"},
+                  {"prompt":"Planting trees can reduce urban ______.", "answer":"heat"}
+                ],
+                "definition": [
+                  {"term":"liveable", "choices":["comfortable and good to live in","too crowded to move","full of factories only"], "answerIndex":0},
+                  {"term":"heatwave", "choices":["a very hot period","a cold winter day","a rainy weekend"], "answerIndex":0},
+                  {"term":"sustainable", "choices":["good for the future","very expensive","only for tourists"], "answerIndex":0}
+                ],
+                "matching": [
+                  {"left":"improve air quality", "rightChoices":["make air cleaner","make roads wider","make parks smaller"], "answer":"make air cleaner"},
+                  {"left":"provide shade", "rightChoices":["protect from sun","increase traffic","create noise"], "answer":"protect from sun"},
+                  {"left":"health benefits", "rightChoices":["positive effects on health","more bills","less time"], "answer":"positive effects on health"}
+                ],
+                "makingSentences": {
+                  "prompt":"Write one sentence supporting or opposing planting more trees in cities.",
+                  "mustUseAny": ["air quality", "shade", "liveable", "pollution", "health"],
+                  "tips": [
+                    "Use one strong reason",
+                    "Add a result: so / therefore",
+                    "Keep your sentence natural"
+                  ]
+                }
+              },
+              "samples": {
+                "naturalSimple9":"Yes, I think it’s important. Trees improve air quality and provide shade, especially in hot weather. They also make cities feel calmer and more comfortable.",
+                "advancedAcademic9":"Yes, planting more trees in cities is essential for environmental and public health reasons. Trees can reduce air pollution, provide shade, and lower urban temperatures during heatwaves. In the long term, they make cities more sustainable and liveable.",
+                "fluentStory9":"Definitely. In summer, you can feel the difference between a street with trees and a street without them. Shade, cooler air, and a calmer atmosphere make people want to walk instead of rushing indoors. It’s a small change with a big impact."
+              }
+            },
+            {
+              "id": "p3_q3",
+              "label": "Part 3 • Q3",
+              "text": "How can governments encourage people to protect green areas?",
+              "keyVocab": ["government", "protect", "green areas", "awareness"],
+              "study": {
+                "collocations": [
+                  {"t":"raise awareness", "d":"teach people why it matters"},
+                  {"t":"strict regulations", "d":"strong rules"},
+                  {"t":"enforce laws", "d":"make rules real with punishment"},
+                  {"t":"community projects", "d":"local activities like planting"},
+                  {"t":"offer incentives", "d":"rewards to motivate"},
+                  {"t":"public campaigns", "d":"messages in media/schools"}
+                ],
+                "vocab": [
+                  {"t":"regulation", "d":"official rule"},
+                  {"t":"fine", "d":"money punishment"},
+                  {"t":"volunteer", "d":"help without payment"},
+                  {"t":"littering", "d":"throwing rubbish"},
+                  {"t":"conservation", "d":"protecting nature"},
+                  {"t":"initiative", "d":"new plan/action"}
+                ],
+                "phrases": [
+                  {"t":"They can start by…", "d":"step 1"},
+                  {"t":"On top of that, …", "d":"extra idea"},
+                  {"t":"It would help if…", "d":"suggestion"},
+                  {"t":"A practical approach is…", "d":"solution"},
+                  {"t":"This creates…", "d":"result"}
+                ],
+                "examples": [
+                  {"t":"Governments can raise awareness through schools and public campaigns.", "d":"awareness"},
+                  {"t":"They should enforce laws against illegal cutting and littering.", "d":"rules"},
+                  {"t":"Incentives like free seedlings can encourage community projects.", "d":"motivation"}
+                ]
+              },
+              "practice": {
+                "gapFilling": [
+                  {"prompt":"Governments can raise ______ through public campaigns.", "answer":"awareness"},
+                  {"prompt":"They can enforce laws and give ______ for littering.", "answer":"fines"},
+                  {"prompt":"Offering small ______ can motivate people to protect parks.", "answer":"incentives"}
+                ],
+                "definition": [
+                  {"term":"incentive", "choices":["a reward that motivates people","a type of tree","a strict law"], "answerIndex":0},
+                  {"term":"conservation", "choices":["protecting nature","building new roads","selling land"], "answerIndex":0},
+                  {"term":"fine", "choices":["money punishment","free gift","public park"], "answerIndex":0}
+                ],
+                "matching": [
+                  {"left":"raise awareness", "rightChoices":["teach people why it matters","cut down trees","build factories"], "answer":"teach people why it matters"},
+                  {"left":"enforce laws", "rightChoices":["make rules real","ignore problems","close schools"], "answer":"make rules real"},
+                  {"left":"community projects", "rightChoices":["local activities","private businesses","international flights"], "answer":"local activities"}
+                ],
+                "makingSentences": {
+                  "prompt":"Write one sentence suggesting one government action to protect green areas.",
+                  "mustUseAny": ["raise awareness", "enforce", "regulations", "incentives", "conservation"],
+                  "tips": [
+                    "Use: can / should",
+                    "Be specific: fines, campaigns, planting",
+                    "End with a full stop"
+                  ]
+                }
+              },
+              "samples": {
+                "naturalSimple9":"Governments can encourage people by raising awareness through schools and media. They should also enforce laws against littering and illegal cutting. Small incentives, like free seedlings, can help too.",
+                "advancedAcademic9":"A practical approach is to combine education and enforcement. Governments can raise awareness through public campaigns and school programmes, while also applying strict regulations and meaningful fines. In addition, incentives and community projects can make conservation feel shared and achievable.",
+                "fluentStory9":"People protect what they value, so governments should help them understand the value first. Clear campaigns, clean parks, and visible rules make a difference. If communities are supported with local planting initiatives and small rewards, people feel involved instead of forced."
+              }
+            },
+            {
+              "id": "p3_q4",
+              "label": "Part 3 • Q4",
+              "text": "What differences do you notice between rural and urban environments in terms of greenery?",
+              "keyVocab": ["rural", "urban", "greenery", "parks"],
+              "study": {
+                "collocations": [
+                  {"t":"widespread greenery", "d":"green areas everywhere"},
+                  {"t":"planned green spaces", "d":"parks designed by cities"},
+                  {"t":"open land", "d":"fields and natural areas"},
+                  {"t":"limited space", "d":"not much room"},
+                  {"t":"more natural scenery", "d":"less built-up"},
+                  {"t":"organised parks", "d":"structured public green areas"}
+                ],
+                "vocab": [
+                  {"t":"fields", "d":"open farm land"},
+                  {"t":"forests", "d":"large areas of trees"},
+                  {"t":"built-up", "d":"full of buildings"},
+                  {"t":"land prices", "d":"cost of land"},
+                  {"t":"density", "d":"how many people/buildings"},
+                  {"t":"public gardens", "d":"small city green areas"}
+                ],
+                "phrases": [
+                  {"t":"In rural areas, …", "d":"contrast start"},
+                  {"t":"Whereas in cities, …", "d":"contrast"},
+                  {"t":"One key difference is…", "d":"focus"},
+                  {"t":"As a result, …", "d":"result"},
+                  {"t":"Overall, …", "d":"summary"}
+                ],
+                "examples": [
+                  {"t":"Rural areas usually have widespread greenery like fields and forests.", "d":"rural"},
+                  {"t":"Cities have planned green spaces such as parks and public gardens.", "d":"urban"},
+                  {"t":"Overall, rural places feel more open, while cities are more built-up.", "d":"summary"}
+                ]
+              },
+              "practice": {
+                "gapFilling": [
+                  {"prompt":"Rural areas often have ______ land and natural scenery.", "answer":"open"},
+                  {"prompt":"In cities, green spaces are more ______, like public parks.", "answer":"planned"},
+                  {"prompt":"Urban areas have ______ space because land prices are high.", "answer":"limited"}
+                ],
+                "definition": [
+                  {"term":"built-up", "choices":["full of buildings","full of trees","completely empty"], "answerIndex":0},
+                  {"term":"density", "choices":["how many people/buildings in an area","how green a park is","how tall trees are"], "answerIndex":0},
+                  {"term":"widespread", "choices":["found everywhere","very small","very expensive"], "answerIndex":0}
+                ],
+                "matching": [
+                  {"left":"open land", "rightChoices":["fields and natural areas","shopping streets","underground stations"], "answer":"fields and natural areas"},
+                  {"left":"planned green spaces", "rightChoices":["parks designed by cities","natural forests only","private houses"], "answer":"parks designed by cities"},
+                  {"left":"limited space", "rightChoices":["not much room","lots of free land","no people"], "answer":"not much room"}
+                ],
+                "makingSentences": {
+                  "prompt":"Write one sentence comparing greenery in rural vs urban areas.",
+                  "mustUseAny": ["whereas", "rural", "urban", "parks", "fields"],
+                  "tips": [
+                    "Use one contrast word: whereas / while",
+                    "Mention an example for each side",
+                    "Keep it clear"
+                  ]
+                }
+              },
+              "samples": {
+                "naturalSimple9":"In rural areas, greenery is usually more natural and widespread, like fields and forests. Whereas in cities, green areas are often planned, such as parks and public gardens. Cities also have less space, so greenery is more limited.",
+                "advancedAcademic9":"One key difference is that rural greenery is typically natural and continuous, while urban greenery is planned and restricted by limited space. Cities rely on organised parks and public gardens because land is expensive and density is high. As a result, rural environments often feel more open and breathable.",
+                "fluentStory9":"When you’re in the countryside, green areas feel endless—fields, trees, and open land. In cities, you usually find greenery in specific places like parks, and it can be crowded. Overall, rural greenery feels natural, while urban greenery feels designed."
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
