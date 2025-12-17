@@ -1,0 +1,9 @@
+{
+  "name": "band8-speaking-trainer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "IELTS Speaking Band 8 trainer (static) + API submissions",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
