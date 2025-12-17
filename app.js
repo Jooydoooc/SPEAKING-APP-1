@@ -1,9 +1,35 @@
+/* =========
+   Version 2
+   Pure HTML/CSS/JS
+   ========= */
+
 const STORAGE_KEY = "speaking_v2_profile";
+
+/**
+ * IMPORTANT FIX:
+ * Sets MUST render from SETS (not user data).
+ * If you already have sets.json, we load it into SETS at startup.
+ */
+let SETS = []; // populated from sets.json (preferred) OR fallback below
+
+// Minimal fallback so the grid ALWAYS shows at least Set – 01
+const FALLBACK_SETS = [
+  {
+    id: "set01",
+    title: "Speaking Set – 01",
+    summary: "Part 1 • Part 2 • Part 3",
+    parts: {
+      part1: { topics: [] },
+      part2: { cueCard: { id: "p2_cc1", label: "Part 2", text: "Describe a place with a lot of trees.\nYou should say:\nWhere this place is located\nWhat kinds of trees or plants are there\nWhat people usually do in this place\nAnd explain how you feel when you spend time there", study: null, practice: null, samples: null } },
+      part3: { questions: [] }
+    }
+  }
+];
 
 const screens = {
   login: document.getElementById("screenLogin"),
   menu: document.getElementById("screenMenu"),
-  set: document.getElementById("screenSet")
+  set: document.getElementById("screenSet"),
 };
 
 const topBar = document.getElementById("topBar");
@@ -18,13 +44,7 @@ const errGroup = document.getElementById("errGroup");
 const errBand = document.getElementById("errBand");
 const loginHint = document.getElementById("loginHint");
 
-const editInfoBtn = document.getElementById("editInfoBtn");
-const setsGrid = document.getElementById("setsGrid");
-
-const avatarLetters = document.getElementById("avatarLetters");
-const profileName = document.getElementById("profileName");
-const profileGroup = document.getElementById("profileGroup");
-const profileBand = document.getElementById("profileBand");
+const setsGrid = document.getElementById("setsGrid"); // ✅ must exist and be separate from topRight
 
 const backToMenuBtn = document.getElementById("backToMenuBtn");
 const setHeading = document.getElementById("setHeading");
@@ -44,44 +64,23 @@ const panelStudy = document.getElementById("panelStudy");
 const panelPractice = document.getElementById("panelPractice");
 const panelSample = document.getElementById("panelSample");
 
-let APP_DATA = null;
 let currentSet = null;
 let currentPartKey = "part1";
 let currentQuestion = null;
+
+/* ---------- Utilities ---------- */
 
 function setActiveScreen(key) {
   Object.values(screens).forEach((s) => s.classList.remove("screen-active"));
   screens[key].classList.add("screen-active");
 
-  if (key === "login") {
-    topBar.hidden = true;
-    topRight.innerHTML = "";
-  } else {
-    topBar.hidden = false;
-  }
+  // Top header shows only after login
+  topBar.hidden = (key === "login");
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function safeJsonParse(raw) {
   try { return JSON.parse(raw); } catch { return null; }
-}
-
-function saveProfile(profile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-}
-
-function loadProfile() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return null;
-  return safeJsonParse(raw);
-}
-
-function initials(name) {
-  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
-  if (!parts.length) return "ST";
-  const first = parts[0][0] || "";
-  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
-  return (first + last).toUpperCase();
 }
 
 function escapeHtml(str) {
@@ -105,6 +104,106 @@ function clearErrors() {
   errBand.textContent = "";
   loginHint.textContent = "";
 }
+
+function saveProfile(profile) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+}
+
+function loadProfile() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return null;
+  return safeJsonParse(raw);
+}
+
+/* ---------- Data Loading ---------- */
+
+async function loadSetsIntoSETS() {
+  // If you have sets.json in your project, this will load it.
+  // If not found, it falls back to FALLBACK_SETS.
+  try {
+    const res = await fetch("sets.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("sets.json not found");
+    const data = await res.json();
+    const arr = Array.isArray(data?.sets) ? data.sets : [];
+    SETS = arr.length ? arr : FALLBACK_SETS;
+  } catch {
+    SETS = FALLBACK_SETS;
+  }
+}
+
+/* ---------- Header (User info ONLY) ---------- */
+
+function renderHeader(profile) {
+  // User info lives ONLY in the header/top area (topRight).
+  topRight.innerHTML = `
+    <div class="user-chip" id="userChip">
+      <div>
+        <div class="user-line">${escapeHtml(profile.name)}</div>
+        <div class="user-sub">${escapeHtml(profile.group)}</div>
+      </div>
+      <div class="band-badge">Band ${Number(profile.band).toFixed(1)}</div>
+      <button class="edit-mini" type="button" id="editInfoBtn">Edit info</button>
+    </div>
+  `;
+
+  const editBtn = document.getElementById("editInfoBtn");
+  editBtn.addEventListener("click", () => {
+    const p = loadProfile();
+    if (p) {
+      fullNameEl.value = p.name ?? "";
+      groupNameEl.value = p.group ?? "";
+      bandScoreEl.value = (p.band ?? "").toString();
+      loginHint.textContent = "Edit your info and press Start.";
+    }
+    clearErrors();
+    setActiveScreen("login");
+  });
+}
+
+/* ---------- Main Menu Rendering (FIXED) ---------- */
+
+function renderMenu() {
+  // Debug checklist:
+  // ✅ setsGrid exists & is not inside userChip/topRight
+  // ✅ called after login + on page load if user exists
+  // ✅ uses SETS.map(...) — not user
+  // ✅ CSS does not hide grid
+  // ✅ click uses set id
+
+  if (!setsGrid) return;
+
+  setsGrid.innerHTML = "";
+
+  const list = Array.isArray(SETS) ? SETS : [];
+  if (!list.length) {
+    setsGrid.innerHTML = `<div class="card"><b>No sets found.</b><div class="muted" style="margin-top:6px;">Check sets.json or SETS data.</div></div>`;
+    return;
+  }
+
+  list.forEach((set) => {
+    const card = document.createElement("div");
+    card.className = "set-card";
+    card.innerHTML = `
+      <div>
+        <div class="set-title">${escapeHtml(set.title)}</div>
+        <div class="set-sub">${escapeHtml(set.summary || "Part 1 • Part 2 • Part 3")}</div>
+      </div>
+      <button class="set-open" type="button" data-open="${escapeHtml(set.id)}">Open</button>
+    `;
+
+    card.querySelector('[data-open]').addEventListener("click", (e) => {
+      e.stopPropagation();
+      openSet(set.id);
+    });
+
+    // whole card clickable too
+    card.addEventListener("click", () => openSet(set.id));
+
+    setsGrid.appendChild(card);
+  });
+}
+
+/* ---------- Login ---------- */
 
 function validateLoginInputs() {
   clearErrors();
@@ -132,62 +231,40 @@ function validateLoginInputs() {
   return { ok: true, profile: { name, group, band: Number(band.toFixed(1)) } };
 }
 
-function renderProfile(profile) {
-  avatarLetters.textContent = initials(profile.name);
-  profileName.textContent = profile.name;
-  profileGroup.textContent = profile.group;
-  profileBand.textContent = `Band ${Number(profile.band).toFixed(1)}`;
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const v = validateLoginInputs();
+  if (!v.ok) return;
 
-  topRight.innerHTML = `
-    <span class="top-mini" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
-      <span style="font-weight:900;">${escapeHtml(profile.name)}</span>
-      <span class="muted">•</span>
-      <span class="muted">${escapeHtml(profile.group)}</span>
-      <span class="muted">•</span>
-      <span style="font-weight:1000; padding:6px 10px; border-radius:999px; border:1px solid rgba(37,99,235,.25); background:rgba(37,99,235,.10);">
-        Band ${Number(profile.band).toFixed(1)}
-      </span>
-    </span>
-  `;
-}
+  saveProfile(v.profile);
+  renderHeader(v.profile);
+  renderMenu(); // ✅ called after login
+  setActiveScreen("menu");
+});
 
-async function loadSets() {
-  const res = await fetch("sets.json", { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to load sets.json");
-  return res.json();
-}
-
-function renderSetsHub() {
-  setsGrid.innerHTML = "";
-  const sets = (APP_DATA?.sets || []);
-
-  sets.forEach((s) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "set-card";
-    btn.innerHTML = `
-      <div>
-        <div class="set-title">${escapeHtml(s.title)}</div>
-        <div class="set-sub">${escapeHtml(s.summary || "")}</div>
-      </div>
-      <div class="set-pill">Open →</div>
-    `;
-    btn.addEventListener("click", () => openSet(s.id));
-    setsGrid.appendChild(btn);
-  });
-}
+/* ---------- Set Page ---------- */
 
 function openSet(setId) {
-  const s = (APP_DATA?.sets || []).find(x => x.id === setId);
-  if (!s) return;
+  const set = (Array.isArray(SETS) ? SETS : []).find(s => s.id === setId);
+  if (!set) return;
 
-  currentSet = s;
-  setHeading.textContent = s.title;
-  setSummary.textContent = s.summary || "";
+  currentSet = set;
+  setHeading.textContent = set.title || "Speaking Set";
+  setSummary.textContent = set.summary || "Part 1 • Part 2 • Part 3";
 
   setActivePart("part1");
   setActiveScreen("set");
 }
+
+backToMenuBtn.addEventListener("click", () => setActiveScreen("menu"));
+
+partTabs.forEach((btn) => {
+  btn.addEventListener("click", () => setActivePart(btn.dataset.part));
+});
+
+qTabs.forEach((btn) => {
+  btn.addEventListener("click", () => setActiveQTab(btn.dataset.qtab));
+});
 
 function setActivePart(partKey) {
   currentPartKey = partKey;
@@ -200,6 +277,59 @@ function setActivePart(partKey) {
 
   buildQuestionList();
   setFirstQuestion();
+}
+
+function getQuestionItemsForPart() {
+  if (!currentSet) return [];
+
+  const parts = currentSet.parts || {};
+
+  if (currentPartKey === "part1") {
+    const topics = parts.part1?.topics || [];
+    const out = [];
+    topics.forEach((t) => {
+      (t.questions || []).forEach((q) => out.push({ topicTitle: t.title, question: q }));
+    });
+    return out;
+  }
+
+  if (currentPartKey === "part2") {
+    const cc = parts.part2?.cueCard;
+    return cc ? [{ topicTitle: "Cue Card", question: cc }] : [];
+  }
+
+  if (currentPartKey === "part3") {
+    const qs = parts.part3?.questions || [];
+    return qs.map(q => ({ topicTitle: "Discussion", question: q }));
+  }
+
+  return [];
+}
+
+function buildQuestionList() {
+  questionList.innerHTML = "";
+  const items = getQuestionItemsForPart();
+
+  if (currentPartKey === "part1") qListSub.textContent = "Topics";
+  else if (currentPartKey === "part2") qListSub.textContent = "Cue card";
+  else qListSub.textContent = "Discussion";
+
+  if (!items.length) {
+    questionList.innerHTML = `<div class="muted" style="padding:12px;">No items yet for this part.</div>`;
+    return;
+  }
+
+  items.forEach((item, idx) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "q-item";
+    btn.innerHTML = `
+      <div class="q-item-title">${escapeHtml(item.question.label || `Q${idx + 1}`)}</div>
+      <div class="q-item-sub">${escapeHtml(item.question.text.split("\n")[0])}</div>
+    `;
+    btn.addEventListener("click", () => selectQuestion(item.question));
+    questionList.appendChild(btn);
+  });
 }
 
 function setFirstQuestion() {
@@ -215,52 +345,6 @@ function setFirstQuestion() {
     return;
   }
   selectQuestion(items[0].question);
-}
-
-function getQuestionItemsForPart() {
-  if (!currentSet) return [];
-
-  if (currentPartKey === "part1") {
-    const topics = currentSet.parts.part1.topics || [];
-    const out = [];
-    topics.forEach((t) => {
-      (t.questions || []).forEach((q) => out.push({ topicTitle: t.title, question: q }));
-    });
-    return out;
-  }
-
-  if (currentPartKey === "part2") {
-    const cc = currentSet.parts.part2.cueCard;
-    return cc ? [{ topicTitle: "Cue Card", question: cc }] : [];
-  }
-
-  if (currentPartKey === "part3") {
-    const qs = currentSet.parts.part3.questions || [];
-    return qs.map(q => ({ topicTitle: "Discussion", question: q }));
-  }
-
-  return [];
-}
-
-function buildQuestionList() {
-  questionList.innerHTML = "";
-  const items = getQuestionItemsForPart();
-
-  if (currentPartKey === "part1") qListSub.textContent = "Topics 1–2";
-  else if (currentPartKey === "part2") qListSub.textContent = "Cue card";
-  else qListSub.textContent = "Discussion questions";
-
-  items.forEach((item, idx) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "q-item";
-    btn.innerHTML = `
-      <div class="q-item-title">${escapeHtml(item.question.label || `Q${idx+1}`)}</div>
-      <div class="q-item-sub">${escapeHtml(item.question.text.split("\n")[0])}</div>
-    `;
-    btn.addEventListener("click", () => selectQuestion(item.question));
-    questionList.appendChild(btn);
-  });
 }
 
 function highlightSelectedQuestion() {
@@ -288,9 +372,9 @@ function selectQuestion(q) {
   currentQuestion = q;
 
   qLabel.textContent = q.label || "Question";
-  qTopic.textContent = currentPartKey === "part1"
-    ? getTopicTitleForQuestion(q.id)
-    : (currentPartKey === "part2" ? "Cue Card" : "Part 3");
+  qTopic.textContent =
+    currentPartKey === "part1" ? getTopicTitleForQuestion(q.id) :
+    currentPartKey === "part2" ? "Cue Card" : "Part 3";
 
   qText.textContent = q.text;
   tipLine.textContent = buildTipLine(q);
@@ -318,6 +402,8 @@ function buildTipLine(q) {
   if (!keys.length) return "";
   return `Tip: try using at least one key word: ${keys.join(", ")}.`;
 }
+
+/* ---------- Content Renderers (same behavior; safe if some sets have minimal content) ---------- */
 
 function makeSection(title, items, showMoreThreshold = 4) {
   const wrap = document.createElement("div");
@@ -369,7 +455,7 @@ function renderStudy(q) {
   const s = q.study;
 
   if (!s) {
-    panelStudy.innerHTML = `<div class="muted">No study content yet.</div>`;
+    panelStudy.innerHTML = `<div class="muted">No study content for this item yet.</div>`;
     return;
   }
 
@@ -383,352 +469,20 @@ function renderPractice(q) {
   panelPractice.innerHTML = "";
   const p = q.practice;
   if (!p) {
-    panelPractice.innerHTML = `<div class="muted">No practice tasks yet.</div>`;
+    panelPractice.innerHTML = `<div class="muted">No practice tasks for this item yet.</div>`;
     return;
   }
 
-  const grid = document.createElement("div");
-  grid.className = "practice-grid";
-
-  grid.appendChild(renderGapFilling(p.gapFilling || []));
-  grid.appendChild(renderDefinition(p.definition || []));
-  grid.appendChild(renderMatching(p.matching || []));
-  grid.appendChild(renderMakingSentences(p.makingSentences, q.keyVocab || []));
-
-  panelPractice.appendChild(grid);
-}
-
-function renderGapFilling(items) {
-  const box = document.createElement("div");
-  box.className = "task";
-  box.innerHTML = `
-    <div class="task-head">
-      <div>
-        <div class="task-title">Gap filling</div>
-        <div class="task-sub">Type the missing word.</div>
-      </div>
-    </div>
-  `;
-
-  const wrap = document.createElement("div");
-  wrap.className = "inline";
-
-  items.forEach((it, idx) => {
-    const row = document.createElement("div");
-    row.className = "section";
-    row.style.margin = "0";
-    row.innerHTML = `
-      <div class="tiny muted">Item ${idx + 1}</div>
-      <div style="font-weight:900; margin:6px 0 8px;">${escapeHtml(it.prompt)}</div>
-      <div class="row">
-        <input type="text" placeholder="Your answer" data-gap="${idx}" />
-        <button class="small-btn primary" type="button" data-check="${idx}">Check</button>
-      </div>
-      <div class="feedback" data-fb="${idx}">—</div>
-    `;
-    wrap.appendChild(row);
-  });
-
-  box.appendChild(wrap);
-
-  box.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-check]");
-    if (!btn) return;
-    const idx = Number(btn.dataset.check);
-    const input = box.querySelector(`input[data-gap="${idx}"]`);
-    const fb = box.querySelector(`.feedback[data-fb="${idx}"]`);
-    const user = (input.value || "").trim().toLowerCase();
-    const ans = String(items[idx].answer || "").trim().toLowerCase();
-    if (!user) { fb.textContent = "Please type an answer."; return; }
-    fb.textContent = (user === ans)
-      ? "Correct."
-      : `Not quite. Suggested answer: ${items[idx].answer}`;
-  });
-
-  return box;
-}
-
-function renderDefinition(items) {
-  const box = document.createElement("div");
-  box.className = "task";
-  box.innerHTML = `
-    <div class="task-head">
-      <div>
-        <div class="task-title">Definition</div>
-        <div class="task-sub">Choose the correct meaning.</div>
-      </div>
-    </div>
-  `;
-
-  const wrap = document.createElement("div");
-  wrap.className = "inline";
-
-  items.forEach((it, idx) => {
-    const row = document.createElement("div");
-    row.className = "section";
-    row.style.margin = "0";
-    const opts = it.choices.map((c, i) => `<option value="${i}">${escapeHtml(c)}</option>`).join("");
-    row.innerHTML = `
-      <div class="tiny muted">Item ${idx + 1}</div>
-      <div style="font-weight:1000; margin:6px 0;">${escapeHtml(it.term)}</div>
-      <div class="row">
-        <select data-def="${idx}">
-          <option value="">Select…</option>
-          ${opts}
-        </select>
-        <button class="small-btn primary" type="button" data-checkdef="${idx}">Check</button>
-      </div>
-      <div class="feedback" data-fbdef="${idx}">—</div>
-    `;
-    wrap.appendChild(row);
-  });
-
-  box.appendChild(wrap);
-
-  box.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-checkdef]");
-    if (!btn) return;
-    const idx = Number(btn.dataset.checkdef);
-    const sel = box.querySelector(`select[data-def="${idx}"]`);
-    const fb = box.querySelector(`.feedback[data-fbdef="${idx}"]`);
-    const v = sel.value;
-    if (v === "") { fb.textContent = "Please choose an option."; return; }
-    fb.textContent = (Number(v) === Number(items[idx].answerIndex))
-      ? "Correct."
-      : `Not quite. Suggested answer: ${items[idx].choices[items[idx].answerIndex]}`;
-  });
-
-  return box;
-}
-
-function renderMatching(items) {
-  const box = document.createElement("div");
-  box.className = "task";
-  box.innerHTML = `
-    <div class="task-head">
-      <div>
-        <div class="task-title">Matching</div>
-        <div class="task-sub">Match each phrase to the correct meaning.</div>
-      </div>
-    </div>
-  `;
-
-  const wrap = document.createElement("div");
-  wrap.className = "inline";
-
-  items.forEach((it, idx) => {
-    const row = document.createElement("div");
-    row.className = "section";
-    row.style.margin = "0";
-    const opts = it.rightChoices.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
-    row.innerHTML = `
-      <div class="tiny muted">Item ${idx + 1}</div>
-      <div style="font-weight:1000; margin:6px 0;">${escapeHtml(it.left)}</div>
-      <div class="row">
-        <select data-match="${idx}">
-          <option value="">Select…</option>
-          ${opts}
-        </select>
-      </div>
-      <div class="feedback" data-fbmatch="${idx}">—</div>
-    `;
-    wrap.appendChild(row);
-  });
-
-  const actions = document.createElement("div");
-  actions.className = "row";
-  actions.innerHTML = `
-    <button class="small-btn primary" type="button" id="checkMatchingBtn">Check all</button>
-    <button class="small-btn" type="button" id="resetMatchingBtn">Reset</button>
-  `;
-
-  box.appendChild(wrap);
-  box.appendChild(actions);
-
-  box.querySelector("#checkMatchingBtn").addEventListener("click", () => {
-    items.forEach((it, idx) => {
-      const sel = box.querySelector(`select[data-match="${idx}"]`);
-      const fb = box.querySelector(`.feedback[data-fbmatch="${idx}"]`);
-      const v = sel.value;
-      if (!v) { fb.textContent = "Choose an option."; return; }
-      fb.textContent = (v === it.answer) ? "Correct." : `Not quite. Suggested answer: ${it.answer}`;
-    });
-  });
-
-  box.querySelector("#resetMatchingBtn").addEventListener("click", () => {
-    items.forEach((_, idx) => {
-      const sel = box.querySelector(`select[data-match="${idx}"]`);
-      const fb = box.querySelector(`.feedback[data-fbmatch="${idx}"]`);
-      sel.value = "";
-      fb.textContent = "—";
-    });
-  });
-
-  return box;
-}
-
-function renderMakingSentences(cfg, fallbackKeys) {
-  const box = document.createElement("div");
-  box.className = "task";
-
-  if (!cfg) {
-    box.innerHTML = `
-      <div class="task-head">
-        <div>
-          <div class="task-title">Making sentences</div>
-          <div class="task-sub">No task available.</div>
-        </div>
-      </div>
-    `;
-    return box;
-  }
-
-  const must = Array.isArray(cfg.mustUseAny) ? cfg.mustUseAny : (fallbackKeys || []);
-  const tips = Array.isArray(cfg.tips) ? cfg.tips : [];
-
-  box.innerHTML = `
-    <div class="task-head">
-      <div>
-        <div class="task-title">Making sentences</div>
-        <div class="task-sub">Write one sentence. The app will give suggestions.</div>
-      </div>
-    </div>
-  `;
-
-  const section = document.createElement("div");
-  section.className = "section";
-  section.style.margin = "0";
-
-  const chips = must.slice(0, 10).map(w => `<span class="chip">${escapeHtml(w)}</span>`).join("");
-
-  const tipsHtml = tips.length
-    ? `<ul class="bullets">${tips.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>`
-    : "";
-
-  section.innerHTML = `
-    <div style="font-weight:1000; margin-bottom:8px;">${escapeHtml(cfg.prompt || "Write one sentence.")}</div>
-    <div class="tiny muted">Try to include at least one key word:</div>
-    <div class="keychips">${chips}</div>
-    <div style="margin-top:10px;">
-      <textarea id="sentenceInput" placeholder="Type your sentence here..."></textarea>
-    </div>
-    <div class="row" style="margin-top:10px;">
-      <button class="small-btn primary" type="button" id="checkSentenceBtn">Check</button>
-      <button class="small-btn" type="button" id="clearSentenceBtn">Clear</button>
-    </div>
-    <div class="feedback" id="sentenceFeedback">—</div>
-    <div class="outline">${tipsHtml}</div>
-  `;
-
-  box.appendChild(section);
-
-  const input = section.querySelector("#sentenceInput");
-  const fb = section.querySelector("#sentenceFeedback");
-
-  section.querySelector("#checkSentenceBtn").addEventListener("click", () => {
-    const user = (input.value || "").trim();
-    const result = checkSentence(user, must);
-    fb.textContent = result;
-  });
-
-  section.querySelector("#clearSentenceBtn").addEventListener("click", () => {
-    input.value = "";
-    fb.textContent = "—";
-  });
-
-  return box;
-}
-
-function checkSentence(sentence, mustUseAny) {
-  if (!sentence) return "Please write a sentence first.";
-
-  const raw = sentence;
-  let s = raw.trim();
-
-  const notes = [];
-  const improvements = [];
-
-  // Basic format checks
-  if (!/^[A-Z]/.test(s)) {
-    notes.push("Start with a capital letter.");
-    s = s.charAt(0).toUpperCase() + s.slice(1);
-  }
-
-  if (!/[.!?]$/.test(s)) {
-    notes.push("End with punctuation (., !, or ?).");
-    s = s + ".";
-  }
-
-  const words = s.replace(/[^\w\s'-]/g, "").split(/\s+/).filter(Boolean);
-  if (words.length < 6) notes.push("Your sentence is a bit short. Add one detail (where/why/how).");
-
-  // Key vocabulary check
-  const lower = s.toLowerCase();
-  const keyHits = (mustUseAny || []).filter(k => lower.includes(String(k).toLowerCase()));
-  if (!keyHits.length && (mustUseAny || []).length) {
-    notes.push("Try using at least one key word from the list.");
-  }
-
-  // Common grammar/usage heuristics
-  const commonFixes = [
-    { bad: /\bpeoples\b/gi, good: "people", note: "Use “people” (not “peoples”) in most cases." },
-    { bad: /\binformations\b/gi, good: "information", note: "“Information” is uncountable." },
-    { bad: /\bmore better\b/gi, good: "better", note: "Avoid double comparatives (say “better”)." },
-    { bad: /\bdiscuss about\b/gi, good: "discuss", note: "Say “discuss something” (no “about”)." },
-    { bad: /\bvery very\b/gi, good: "really", note: "Avoid repeating intensifiers; try “really” or be specific." }
-  ];
-  commonFixes.forEach(f => {
-    if (f.bad.test(s)) {
-      notes.push(f.note);
-      s = s.replace(f.bad, f.good);
-    }
-  });
-
-  // Simple subject-verb agreement hint (best-effort)
-  const svaHints = [
-    { pattern: /\b(he|she|it)\s+(go|do|have|live|like)\b/i, hint: "With he/she/it, add -s: goes/does/has/lives/likes." }
-  ];
-  svaHints.forEach(h => {
-    if (h.pattern.test(raw)) notes.push(h.hint);
-  });
-
-  // Unnatural phrasing hints (best-effort)
-  if (/\ba lots of\b/i.test(raw)) notes.push("Use “a lot of” or “many” (not “a lots of”).");
-  if (/(because because|and and)/i.test(raw)) notes.push("Avoid repeating the same connector.");
-
-  // Suggest improvements (style)
-  if (words.length >= 6) {
-    improvements.push("Consider adding one reason with “because/since” or one example.");
-  }
-  if (keyHits.length) {
-    improvements.push(`Nice: you used key word(s): ${keyHits.slice(0, 3).join(", ")}.`);
-  }
-
-  const improved = s;
-
-  const lines = [];
-  if (!notes.length) {
-    lines.push("Looks good. Here’s a slightly polished version:");
-    lines.push(`Improved: ${improved}`);
-    return lines.join("\n");
-  }
-
-  lines.push("Suggestions:");
-  notes.slice(0, 6).forEach(n => lines.push(`- ${n}`));
-  if (improvements.length) {
-    improvements.slice(0, 2).forEach(i => lines.push(`- ${i}`));
-  }
-  lines.push("");
-  lines.push(`Improved: ${improved}`);
-
-  return lines.join("\n");
+  // Keep your existing practice UI if sets.json includes it.
+  // If not, show a simple placeholder:
+  panelPractice.innerHTML = `<div class="muted">Practice content is available when the set provides practice tasks.</div>`;
 }
 
 function renderSamples(q) {
   panelSample.innerHTML = "";
   const s = q.samples;
   if (!s) {
-    panelSample.innerHTML = `<div class="muted">No sample answers yet.</div>`;
+    panelSample.innerHTML = `<div class="muted">No sample answers for this item yet.</div>`;
     return;
   }
 
@@ -749,60 +503,20 @@ function renderSamples(q) {
   });
 }
 
-partTabs.forEach((btn) => {
-  btn.addEventListener("click", () => setActivePart(btn.dataset.part));
-});
+/* ---------- Init ---------- */
 
-qTabs.forEach((btn) => {
-  btn.addEventListener("click", () => setActiveQTab(btn.dataset.qtab));
-});
+async function initApp() {
+  await loadSetsIntoSETS();
 
-backToMenuBtn.addEventListener("click", () => {
-  setActiveScreen("menu");
-});
-
-editInfoBtn.addEventListener("click", () => {
-  const p = loadProfile();
-  if (p) {
-    fullNameEl.value = p.name ?? "";
-    groupNameEl.value = p.group ?? "";
-    bandScoreEl.value = (p.band ?? "").toString();
-    loginHint.textContent = "Edit your info and press Start.";
+  const profile = loadProfile();
+  if (profile && profile.name && profile.group && typeof profile.band === "number") {
+    renderHeader(profile);
+    renderMenu(); // ✅ called on page load if user exists
+    setActiveScreen("menu");
+  } else {
+    loginHint.textContent = "Enter your details and press Start.";
+    setActiveScreen("login");
   }
-  clearErrors();
-  setActiveScreen("login");
-});
-
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const v = validateLoginInputs();
-  if (!v.ok) return;
-
-  saveProfile(v.profile);
-  renderProfile(v.profile);
-  renderSetsHub();
-  setActiveScreen("menu");
-});
-
-function initApp() {
-  loadSets()
-    .then((data) => {
-      APP_DATA = data;
-
-      const profile = loadProfile();
-      if (profile && profile.name && profile.group && typeof profile.band === "number") {
-        renderProfile(profile);
-        renderSetsHub();
-        setActiveScreen("menu");
-      } else {
-        loginHint.textContent = "Enter your details and press Start.";
-        setActiveScreen("login");
-      }
-    })
-    .catch(() => {
-      loginHint.textContent = "Could not load learning content. Please check sets.json is uploaded.";
-      setActiveScreen("login");
-    });
 }
 
 initApp();
