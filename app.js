@@ -131,7 +131,116 @@ const DATA = {
 };
 
 /* -----------------------------
-   Helpers
+   Login/Profile (Required)
+--------------------------------*/
+const loginOverlay = $("#loginOverlay");
+const appContainer = $("#appContainer");
+const profileLine = $("#profileLine");
+
+const loginName = $("#loginName");
+const loginGroup = $("#loginGroup");
+const loginLevel = $("#loginLevel");
+const loginStatus = $("#loginStatus");
+
+const startBtn = $("#startBtn");
+const demoBtn = $("#demoBtn");
+const logoutBtn = $("#logoutBtn");
+const editProfileBtn = $("#editProfileBtn");
+
+function setLoginStatus(t){ loginStatus.textContent = t; }
+
+function getProfile(){
+  try{
+    const raw = localStorage.getItem("band8_profile");
+    return raw ? JSON.parse(raw) : null;
+  }catch{
+    return null;
+  }
+}
+function saveProfile(p){
+  localStorage.setItem("band8_profile", JSON.stringify(p));
+}
+function clearProfile(){
+  localStorage.removeItem("band8_profile");
+}
+
+function renderProfileLine(){
+  const p = getProfile();
+  if(!p){ profileLine.textContent = "—"; return; }
+  const parts = [
+    `👤 ${p.name}`,
+    p.group ? `👥 ${p.group}` : null,
+    p.level ? `📈 ${p.level}` : null
+  ].filter(Boolean);
+  profileLine.textContent = parts.join(" • ");
+}
+
+function showLogin(prefill=false){
+  loginOverlay.style.display = "flex";
+  appContainer.style.visibility = "hidden";
+  appContainer.style.pointerEvents = "none";
+
+  const p = getProfile();
+  if (prefill && p){
+    loginName.value = p.name || "";
+    loginGroup.value = p.group || "";
+    if (p.level) loginLevel.value = p.level;
+  }
+  setLoginStatus("Ready.");
+}
+
+function hideLogin(){
+  loginOverlay.style.display = "none";
+  appContainer.style.visibility = "visible";
+  appContainer.style.pointerEvents = "auto";
+  renderProfileLine();
+}
+
+function ensureLogin(){
+  const p = getProfile();
+  if(!p || !p.name){
+    showLogin(true);
+  }else{
+    hideLogin();
+  }
+}
+
+startBtn.addEventListener("click", () => {
+  const name = loginName.value.trim();
+  const group = loginGroup.value.trim();
+  const level = loginLevel.value;
+
+  if(!name){
+    setLoginStatus("❌ Please enter your name.");
+    return;
+  }
+
+  saveProfile({ name, group, level });
+  setLoginStatus("✅ Saved. Starting...");
+  hideLogin();
+});
+
+demoBtn.addEventListener("click", () => {
+  loginName.value = "Student";
+  loginGroup.value = "Group A";
+  loginLevel.value = "Band 5.5 - 6.0";
+  setLoginStatus("Demo filled. Press Start.");
+});
+
+logoutBtn.addEventListener("click", () => {
+  clearProfile();
+  showLogin(false);
+  renderProfileLine();
+});
+
+editProfileBtn.addEventListener("click", () => {
+  showLogin(true);
+});
+
+ensureLogin();
+
+/* -----------------------------
+   General helpers
 --------------------------------*/
 function fillSelect(selectEl, items) {
   selectEl.innerHTML = "";
@@ -574,32 +683,11 @@ $("#resetBtn").addEventListener("click", () => {
 /* -----------------------------
    SUBMIT TO TEACHER (API)
 --------------------------------*/
-const studentNameEl = $("#studentName");
-const studentGroupEl = $("#studentGroup");
 const submitBtn = $("#submitBtn");
-const saveStudentBtn = $("#saveStudentBtn");
 const submitStatus = $("#submitStatus");
-
-function setStatus(text) {
-  submitStatus.textContent = text;
-}
-
-function loadStudent() {
-  const n = localStorage.getItem("band8_student_name") || "";
-  const g = localStorage.getItem("band8_student_group") || "";
-  studentNameEl.value = n;
-  studentGroupEl.value = g;
-}
-function saveStudent() {
-  localStorage.setItem("band8_student_name", studentNameEl.value.trim());
-  localStorage.setItem("band8_student_group", studentGroupEl.value.trim());
-  setStatus("Saved student info.");
-}
-
-saveStudentBtn.addEventListener("click", saveStudent);
+function setSubmitStatus(text) { submitStatus.textContent = text; }
 
 function getCurrentContext() {
-  // part, topic, question, notes
   if (currentTab === "part1") {
     const topic = DATA.topics[Number(p1Topic.value)].name;
     return { part: "Part 1", topic, question: p1QText.textContent.trim(), notes: "" };
@@ -622,33 +710,30 @@ function getCurrentContext() {
 }
 
 async function submitCurrentTask() {
-  const studentName = studentNameEl.value.trim();
-  const group = studentGroupEl.value.trim();
+  const profile = getProfile();
+  if (!profile || !profile.name) {
+    setSubmitStatus("❌ Please login first.");
+    showLogin(true);
+    return;
+  }
+
   const ctx = getCurrentContext();
-
-  if (!studentName) {
-    setStatus("❌ Write student name first.");
-    return;
-  }
   if (!ctx.question) {
-    setStatus("❌ No question found to submit.");
+    setSubmitStatus("❌ No question found to submit.");
     return;
   }
-
-  // save automatically so they don’t type again
-  localStorage.setItem("band8_student_name", studentName);
-  localStorage.setItem("band8_student_group", group);
 
   submitBtn.disabled = true;
-  setStatus("⏳ Submitting...");
+  setSubmitStatus("⏳ Submitting...");
 
   try {
     const res = await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        studentName,
-        group,
+        studentName: profile.name,
+        group: profile.group || "",
+        level: profile.level || "",
         part: ctx.part,
         topic: ctx.topic,
         question: ctx.question,
@@ -657,15 +742,14 @@ async function submitCurrentTask() {
     });
 
     const data = await res.json().catch(() => ({}));
-
     if (!res.ok || !data.ok) {
-      setStatus("❌ Submit failed. Check API/env vars.");
+      setSubmitStatus("❌ Submit failed. Check API/env vars.");
       console.error("Submit error:", data);
     } else {
-      setStatus("✅ Submitted successfully!");
+      setSubmitStatus("✅ Submitted successfully!");
     }
   } catch (e) {
-    setStatus("❌ Network error. Try again.");
+    setSubmitStatus("❌ Network error. Try again.");
     console.error(e);
   } finally {
     submitBtn.disabled = false;
@@ -673,5 +757,5 @@ async function submitCurrentTask() {
 }
 
 submitBtn.addEventListener("click", submitCurrentTask);
-loadStudent();
-setStatus("Ready.");
+setSubmitStatus("Ready.");
+renderProfileLine();
